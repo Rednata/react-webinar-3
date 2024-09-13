@@ -31,12 +31,12 @@ function App({ store }) {
                   <span className="Item-titleMain">{item.title} </span>
                   {
                     item.countSelect &&
-                    <span className="Item-subtitle"> Выделяли {item.countSelect} раз</span>
+                    <span className="Item-subtitle">{store.setSelectedItemTitle(item.countSelect)}</span>
                   }
                 </div>
 
                 <div className="Item-actions">
-                  <button onClick={() => store.deleteItem(item.code)}>Удалить</button>
+                  <button onClick={(e) => store.deleteItem(e, item.code)}>Удалить</button>
                 </div>
               </div>
             </div>

@@ -71,7 +71,8 @@ class Store {
    * Удаление записи по коду
    * @param code
    */
-  deleteItem(code) {
+  deleteItem(e, code) {
+    e.stopPropagation();
     this.setState({
       ...this.state,
       list: this.state.list.filter(item => item.code !== code),
@@ -105,6 +106,18 @@ class Store {
         return item;
       }),
     });
+  }
+
+  /**
+   * Склонение слова "раз" в завимости от числа count
+   * @param count
+   * @returns {String}
+   */
+  setSelectedItemTitle(count) {
+    const reg = /[^2-4]$|(\d?1[2-4]$)/;
+    const title = reg.test(count) ?
+      ` Выделяли ${count} раз` : ` Выделяли ${count} раза`
+    return title;
   }
 }
 
