@@ -54,9 +54,6 @@ body {
   padding: 20px 10px;
 }
 
-.Item-subtitle:before {
-  content: '|';
-}
 
 .Item-actions {
   display: flex;

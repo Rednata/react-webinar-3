@@ -1,11 +1,12 @@
+import { generateCode } from './utils';
+
 /**
  * Хранилище состояния приложения
  */
 class Store {
   constructor(initState = {}) {
     this.state = initState;
-    this.listeners = []; // Слушатели изменений состояния;
-    this.lastCode = this.setLastCode();
+    this.listeners = []; // Слушатели изменений состояния
   }
 
   /**
@@ -19,15 +20,6 @@ class Store {
     return () => {
       this.listeners = this.listeners.filter(item => item !== listener);
     };
-  }
-
-  /**
-   * Находит максимальное значение кода code в initialState и записывает в state.
-   * Вызывается один раз при инициализации
-   * @returns {Number}
-   */
-  setLastCode() {
-    return Math.max(...this.state.list.map(item => item.code)) || 1
   }
 
   /**
@@ -49,21 +41,12 @@ class Store {
   }
 
   /**
-   * Установка кода code для новой записи
-   * @returns {Number}
-   */
-  setCode() {
-    this.lastCode = this.lastCode + 1;
-    return this.lastCode
-  }
-
-  /**
    * Добавление новой записи
    */
   addItem() {
     this.setState({
       ...this.state,
-      list: [...this.state.list, { code: this.setCode(), title: 'Новая запись' }],
+      list: [...this.state.list, { code: generateCode(), title: 'Новая запись' }],
     });
   }
 
@@ -71,22 +54,12 @@ class Store {
    * Удаление записи по коду
    * @param code
    */
-  deleteItem(e, code) {
-    e.stopPropagation();
+  deleteItem(code) {
     this.setState({
       ...this.state,
+      // Новый список, в котором не будет удаляемой записи
       list: this.state.list.filter(item => item.code !== code),
     });
-  }
-
-  /**
-   * Установка значения, сколько раз выделяли запись
-   * @param item
-   */
-  setCountSelect(item) {
-    if (item.countSelect) {
-      item.countSelect = item.selected ? item.countSelect + 1 : item.countSelect
-    } else item.countSelect = 1
   }
 
   /**
@@ -98,26 +71,17 @@ class Store {
       ...this.state,
       list: this.state.list.map(item => {
         if (item.code === code) {
-          item.selected = !item.selected;
-          this.setCountSelect(item)
-        } else {
-          item.selected = false;
+          // Смена выделения и подсчёт
+          return {
+            ...item,
+            selected: !item.selected,
+            count: item.selected ? item.count : item.count + 1 || 1,
+          };
         }
-        return item;
+        // Сброс выделения если выделена
+        return item.selected ? { ...item, selected: false } : item;
       }),
     });
-  }
-
-  /**
-   * Склонение слова "раз" в завимости от числа count
-   * @param count
-   * @returns {String}
-   */
-  setSelectedItemTitle(count) {
-    const reg = /[^2-4]$|(\d?1[2-4]$)/;
-    const title = reg.test(count) ?
-      ` Выделяли ${count} раз` : ` Выделяли ${count} раза`
-    return title;
   }
 }
 
