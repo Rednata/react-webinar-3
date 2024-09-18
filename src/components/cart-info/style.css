@@ -1,0 +1,10 @@
+.CartInfo {
+  display: flex;
+  justify-content: flex-end;
+  align-items: baseline;
+}
+
+.CartInfo-text {
+  font-weight: 700;
+  font-size: 18px;
+}
