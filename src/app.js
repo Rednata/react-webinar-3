@@ -14,9 +14,10 @@ import CartInfo from './components/cart-info';
 function App({ store }) {
   const list = store.getState().list;
   const cart = store.getState().cart;
-  console.log('cart: ', cart);
 
-  const getCountItemsInCart = () => store.getCountItemsInCart();
+  const countCart = store.getCountItemsInCart();
+
+  const sumCart = store.getSumOfCart();
 
   const [showModal, setShowModal] = useState(false);
 
@@ -41,7 +42,9 @@ function App({ store }) {
     <>
       <PageLayout>
         <Head title="Магазин" />
-        <CartInfo count={getCountItemsInCart()}>
+        <CartInfo
+          count={countCart}
+          sum={sumCart}>
           <Controls controlTitle="Перейти" controlFunc={callbacks.onShowModal} />
         </CartInfo>
         <List
@@ -53,10 +56,14 @@ function App({ store }) {
       </PageLayout>
       {
         showModal &&
-        <Modal onShowModal={callbacks.onShowModal}>
+        <Modal
+          count={countCart}
+          sum={sumCart}
+          list={<List list={cart} controlTitle="Удалить"/>}
+          onShowModal={callbacks.onShowModal}
+        >
           <Head title="Корзина" addClass='Modal-head'/>
           <Controls controlTitle="Закрыть" controlFunc={callbacks.onShowModal}/>
-          <List list={cart} controlTitle="Удалить"/>
         </Modal>
       }
     </>

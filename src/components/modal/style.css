@@ -17,3 +17,17 @@
   border-radius: 10px 10px 0 0;
 }
 
+.Modal-empty {
+  text-align: center;
+  font-weight: 700;
+  font-size: 26px;
+}
+
+.Modal-footer {
+  font-weight: 700;
+  display: flex;
+  justify-content: flex-end;
+  column-gap: 30px;
+  padding-right: 110px;
+  padding-bottom: 10px;
+}

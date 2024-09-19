@@ -1,9 +1,8 @@
 import React from "react";
 import './style.css';
-import { plural } from "../../utils";
+import { plural, separateDigits } from "../../utils";
 
-function CartInfo({ count, children }) {
-  console.log('count: ', count);
+function CartInfo({ count, sum, children }) {
 
   return (
     <div className="CartInfo">
@@ -11,7 +10,7 @@ function CartInfo({ count, children }) {
         {
           count ?
           (<span className="CartInfo-text">
-            {` ${count}`} {plural(count, {one: 'товар', few: 'товара', many: 'товаров'})} / 223&nbsp;₽</span>) :
+            {` ${count}`} {plural(count, {one: 'товар', few: 'товара', many: 'товаров'})} / {separateDigits(sum)}&nbsp;₽</span>) :
           (<span className="CartInfo-text"> пусто</span>)
         }
       </p>

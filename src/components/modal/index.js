@@ -1,7 +1,8 @@
 import React from "react";
 import './style.css';
+import { separateDigits } from "../../utils";
 
-function Modal ({onShowModal, children}) {
+function Modal ({count, sum, list, onShowModal, children}) {
 
   const callbacks = {
     onModalClick: (e) => {
@@ -14,7 +15,16 @@ function Modal ({onShowModal, children}) {
   return (
     <div className="Modal" onClick={callbacks.onModalClick}>
       <div className="Modal-content">
-          {children}
+        {children}
+        {count ? (
+          list
+        ) : (
+          <p className="Modal-empty">В корзине пусто :(</p>
+        )}
+        <div className="Modal-footer">
+          <span>Итого </span>
+          <span>{separateDigits(sum)}&nbsp;₽</span>
+        </div>
       </div>
     </div>
   )

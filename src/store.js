@@ -105,9 +105,11 @@ class Store {
   }
 
   getCountItemsInCart() {
-    console.warn((this.state.cart));
-    
     return (this.state.cart).length;
+  }
+
+  getSumOfCart() {
+    return this.state.cart.reduce((acc, elem) => acc + elem.count  * elem.price, 0)
   }
 }
 
