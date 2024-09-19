@@ -17,14 +17,16 @@ function Modal ({count, sum, list, onShowModal, children}) {
       <div className="Modal-content">
         {children}
         {count ? (
-          list
+          <>
+            {list}
+            <div className="Modal-footer">
+              <span>Итого </span>
+              <span>{separateDigits(sum)}&nbsp;₽</span>
+            </div>
+          </>
         ) : (
           <p className="Modal-empty">В корзине пусто :(</p>
         )}
-        <div className="Modal-footer">
-          <span>Итого </span>
-          <span>{separateDigits(sum)}&nbsp;₽</span>
-        </div>
       </div>
     </div>
   )

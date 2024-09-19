@@ -104,6 +104,11 @@ class Store {
     console.log(this.getState().cart);
   }
 
+  deleteItemFromCart(item) {
+    this.setCart(
+      [...this.state.cart.filter(elem => elem.code !== item.code)])
+  }
+
   getCountItemsInCart() {
     return (this.state.cart).length;
   }

@@ -36,6 +36,10 @@ function App({ store }) {
     addItemToCart: useCallback((item) => {
       store.addItemToCart(item);
     }, [store]),
+
+    deleteItemFromCart: useCallback((item) => {
+      store.deleteItemFromCart(item);
+    }, [store]),
   };
 
   return (
@@ -59,7 +63,7 @@ function App({ store }) {
         <Modal
           count={countCart}
           sum={sumCart}
-          list={<List list={cart} controlTitle="Удалить"/>}
+          list={<List list={cart} controlTitle="Удалить" controlFunc={callbacks.deleteItemFromCart}/>}
           onShowModal={callbacks.onShowModal}
         >
           <Head title="Корзина" addClass='Modal-head'/>
