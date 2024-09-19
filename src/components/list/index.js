@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Item from '../item';
 import './style.css';
 
-function List({ list = {code: 0}, controlTitle = "", controlFunc = () => {}}) {
+function List({ list = [{code: 0}], controlTitle = "", controlFunc = () => {}}) {
   return (
     <div className="List">
       {list.map(item => (

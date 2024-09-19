@@ -4,7 +4,7 @@ import './style.css';
 import { separateDigits } from "../../utils";
 
 function Modal ({
-  count = 0, sum = 0, list = {}, onShowModal = () => {}, children = ''
+  count = 0, sum = 0, list = '', onShowModal = () => {}, children = ''
 }) {
 
   const callbacks = {
@@ -38,7 +38,7 @@ function Modal ({
 Modal.propTypes = {
   count: PropTypes.number,
   sum: PropTypes.number,
-  list: PropTypes.arrayOf(PropTypes.object),
+  list: PropTypes.node,
   onShowModal: PropTypes.func,
   children: PropTypes.node,
 };

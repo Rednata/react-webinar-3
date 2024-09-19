@@ -85,34 +85,51 @@ class Store {
     });
   }
 
+  /**
+   * Добавление состояния корзины в общий state
+   * @param {newCart} {Object}
+   */
   setCart(newCart) {
-    console.log('newCart: ', newCart);
-    // this.state.cart = newCart;
     this.setState({...this.state, cart: [...newCart]})
   }
 
+  /**
+   * Добавление уникального товара в корзину
+   * @param item {Object}
+   */
   addItemToCart(item) {
     const repeatItem = this.state.cart.find(elem => elem.code === item.code);
-    const newCart = this.state.cart.filter(elem => elem.code !== item.code);
     if (repeatItem) {
-      console.log('temp: ', repeatItem);
-      console.log('>>>>', item.count);
-      this.setCart([...newCart, {...item, count: repeatItem.count + 1}]);
+      const newCart = [
+        ...this.state.cart.filter(elem => elem.code !== item.code),
+          {...repeatItem, count: repeatItem.count + 1}];
+      this.setCart(newCart);
     } else {
       this.setCart([...this.getState().cart, {...item, count: 1}]);
     }
-    console.log(this.getState().cart);
   }
 
+  /**
+   * Удаление товара из корзины
+   * @param item {Object}
+   */
   deleteItemFromCart(item) {
     this.setCart(
       [...this.state.cart.filter(elem => elem.code !== item.code)])
   }
 
+  /**
+   * Подсчет количества уникальных товаров в корзине
+   * @returns Number
+   */
   getCountItemsInCart() {
     return (this.state.cart).length;
   }
 
+  /**
+   * Подсчет суммы всех товаров в корзине
+   * @returns Number
+   */
   getSumOfCart() {
     return this.state.cart.reduce((acc, elem) => acc + elem.count  * elem.price, 0)
   }
