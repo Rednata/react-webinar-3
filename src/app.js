@@ -13,6 +13,10 @@ import CartInfo from './components/cart-info';
  */
 function App({ store }) {
   const list = store.getState().list;
+  const cart = store.getState().cart;
+  console.log('cart: ', cart);
+
+  const getCountItemsInCart = () => store.getCountItemsInCart();
 
   const [showModal, setShowModal] = useState(false);
 
@@ -24,19 +28,12 @@ function App({ store }) {
       [store],
     ),
 
-    onSelectItem: useCallback(
-      code => {
-        store.selectItem(code);
-      },
-      [store],
-    ),
-
     onShowModal: useCallback(() => {
       setShowModal(!showModal);
     }, [showModal]),
 
-    onAddItem: useCallback(() => {
-      store.addItem();
+    addItemToCart: useCallback((item) => {
+      store.addItemToCart(item);
     }, [store]),
   };
 
@@ -44,21 +41,22 @@ function App({ store }) {
     <>
       <PageLayout>
         <Head title="Магазин" />
-        <CartInfo>
-          <Controls title="Перейти" onShowModal={callbacks.onShowModal} />
+        <CartInfo count={getCountItemsInCart()}>
+          <Controls controlTitle="Перейти" controlFunc={callbacks.onShowModal} />
         </CartInfo>
-        {/* <Controls title="Перейти" onAdd={callbacks.onAddItem} /> */}
         <List
           list={list}
+          controlTitle="Добавить"
+          controlFunc={callbacks.addItemToCart}
           onDeleteItem={callbacks.onDeleteItem}
-          onSelectItem={callbacks.onSelectItem}
         />
       </PageLayout>
       {
         showModal &&
         <Modal onShowModal={callbacks.onShowModal}>
           <Head title="Корзина" addClass='Modal-head'/>
-          <Controls title="Закрыть" onShowModal={callbacks.onShowModal}/>
+          <Controls controlTitle="Закрыть" controlFunc={callbacks.onShowModal}/>
+          <List list={cart} controlTitle="Удалить"/>
         </Modal>
       }
     </>

@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { separateDigits } from '../../utils';
 import './style.css';
+import Controls from '../controls';
 
-function Item({item, onDelete = () => {}}) {
+function Item({item, controlTitle = "", controlFunc = () => {}}) {
 
   const callbacks = {
-    onDelete: e => {
-      e.stopPropagation();
-      onDelete(item.code);
+    controlFunc: () => {
+      controlFunc(item);
     },
   };
 
@@ -23,9 +23,14 @@ function Item({item, onDelete = () => {}}) {
       <div className="Item-price">
         {separateDigits(item.price)}&nbsp;₽
       </div>
-      <div className="Item-actions">
+      {
+        item.count &&
+        <div className="Item-count">{item.count}&nbsp;шт</div>
+      }
+      <Controls controlTitle={controlTitle} controlFunc={callbacks.controlFunc}/>
+      {/* <div className="Item-actions">
         <button onClick={callbacks.onDelete}>Удалить</button>
-      </div>
+      </div> */}
     </div>
   );
 }
@@ -37,6 +42,7 @@ Item.propTypes = {
     selected: PropTypes.bool,
     count: PropTypes.number,
   }).isRequired,
+  controlTitle: PropTypes.string,
   onDelete: PropTypes.func
 };
 

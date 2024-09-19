@@ -10,7 +10,9 @@
   color: #fff;
 }
 
-.Item-code {
+.Item-code,
+.Item-price,
+.Item-count {
   padding: 20px 10px 20px 20px;
 }
 

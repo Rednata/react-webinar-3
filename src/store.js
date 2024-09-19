@@ -6,6 +6,7 @@ import { generateCode } from './utils';
 class Store {
   constructor(initState = {}) {
     this.state = initState;
+    this.state.cart=[];
     this.listeners = []; // Слушатели изменений состояния
   }
 
@@ -82,6 +83,31 @@ class Store {
         return item.selected ? { ...item, selected: false } : item;
       }),
     });
+  }
+
+  setCart(newCart) {
+    console.log('newCart: ', newCart);
+    // this.state.cart = newCart;
+    this.setState({...this.state, cart: [...newCart]})
+  }
+
+  addItemToCart(item) {
+    const repeatItem = this.state.cart.find(elem => elem.code === item.code);
+    const newCart = this.state.cart.filter(elem => elem.code !== item.code);
+    if (repeatItem) {
+      console.log('temp: ', repeatItem);
+      console.log('>>>>', item.count);
+      this.setCart([...newCart, {...item, count: repeatItem.count + 1}]);
+    } else {
+      this.setCart([...this.getState().cart, {...item, count: 1}]);
+    }
+    console.log(this.getState().cart);
+  }
+
+  getCountItemsInCart() {
+    console.warn((this.state.cart));
+    
+    return (this.state.cart).length;
   }
 }
 
