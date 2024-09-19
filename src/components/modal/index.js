@@ -1,8 +1,11 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import './style.css';
 import { separateDigits } from "../../utils";
 
-function Modal ({count, sum, list, onShowModal, children}) {
+function Modal ({
+  count = 0, sum = 0, list = {}, onShowModal = () => {}, children = ''
+}) {
 
   const callbacks = {
     onModalClick: (e) => {
@@ -31,5 +34,13 @@ function Modal ({count, sum, list, onShowModal, children}) {
     </div>
   )
 }
+
+Modal.propTypes = {
+  count: PropTypes.number,
+  sum: PropTypes.number,
+  list: PropTypes.arrayOf(PropTypes.object),
+  onShowModal: PropTypes.func,
+  children: PropTypes.node,
+};
 
 export default Modal;

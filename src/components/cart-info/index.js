@@ -1,8 +1,9 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import './style.css';
 import { plural, separateDigits } from "../../utils";
 
-function CartInfo({ count, sum, children }) {
+function CartInfo({ count = 0, sum = 0, children = '' }) {
 
   return (
     <div className="CartInfo">
@@ -19,4 +20,10 @@ function CartInfo({ count, sum, children }) {
   )
 }
 
-export default CartInfo;
+CartInfo.propTypes = {
+  count: PropTypes.number,
+  sum: PropTypes.number,
+  children: PropTypes.node,
+};
+
+export default React.memo(CartInfo);

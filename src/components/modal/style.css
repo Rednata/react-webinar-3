@@ -14,7 +14,14 @@
 }
 
 .Modal-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   border-radius: 10px 10px 0 0;
+}
+
+.Modal-head .Controls {
+  display: block;
 }
 
 .Modal-empty {
@@ -24,10 +31,11 @@
 }
 
 .Modal-footer {
-  font-weight: 700;
   display: flex;
   justify-content: flex-end;
   column-gap: 30px;
+  font-weight: 700;
+  font-size: 18px;
   padding-right: 110px;
   padding-bottom: 40px;
 }

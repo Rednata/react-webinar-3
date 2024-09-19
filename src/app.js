@@ -16,7 +16,6 @@ function App({ store }) {
   const cart = store.getState().cart;
 
   const countCart = store.getCountItemsInCart();
-
   const sumCart = store.getSumOfCart();
 
   const [showModal, setShowModal] = useState(false);
@@ -48,7 +47,8 @@ function App({ store }) {
         <Head title="Магазин" />
         <CartInfo
           count={countCart}
-          sum={sumCart}>
+          sum={sumCart}
+        >
           <Controls controlTitle="Перейти" controlFunc={callbacks.onShowModal} />
         </CartInfo>
         <List
@@ -66,8 +66,9 @@ function App({ store }) {
           list={<List list={cart} controlTitle="Удалить" controlFunc={callbacks.deleteItemFromCart}/>}
           onShowModal={callbacks.onShowModal}
         >
-          <Head title="Корзина" addClass='Modal-head'/>
-          <Controls controlTitle="Закрыть" controlFunc={callbacks.onShowModal}/>
+          <Head title="Корзина" addClass='Modal-head'>
+            <Controls controlTitle="Закрыть" controlFunc={callbacks.onShowModal}/>
+          </Head>
         </Modal>
       }
     </>

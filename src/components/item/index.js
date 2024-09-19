@@ -28,9 +28,6 @@ function Item({item, controlTitle = "", controlFunc = () => {}}) {
         <div className="Item-count">{item.count}&nbsp;шт</div>
       }
       <Controls controlTitle={controlTitle} controlFunc={callbacks.controlFunc}/>
-      {/* <div className="Item-actions">
-        <button onClick={callbacks.onDelete}>Удалить</button>
-      </div> */}
     </div>
   );
 }
@@ -43,7 +40,7 @@ Item.propTypes = {
     count: PropTypes.number,
   }).isRequired,
   controlTitle: PropTypes.string,
-  onDelete: PropTypes.func
+  controlFunc: PropTypes.func
 };
 
 export default React.memo(Item);
