@@ -3,8 +3,9 @@ import List from './components/list';
 import Controls from './components/controls';
 import Head from './components/head';
 import PageLayout from './components/page-layout';
-import Modal from './components/modal';
+import ModalLayout from './components/modal-layout';
 import CartInfo from './components/cart-info';
+import Cart from './components/cart';
 
 /**
  * Приложение
@@ -36,21 +37,18 @@ function App({ store }) {
       store.addItemToCart(item);
     }, [store]),
 
-    deleteItemFromCart: useCallback((item) => {
-      store.deleteItemFromCart(item);
+    deleteItemFromCart: useCallback((code) => {
+      store.deleteItemFromCart(code);
     }, [store]),
   };
 
   return (
     <>
-      <PageLayout>
-        <Head title="Магазин" />
-        <CartInfo
-          count={countCart}
-          sum={sumCart}
-        >
-          <Controls controlTitle="Перейти" controlFunc={callbacks.onShowModal} />
-        </CartInfo>
+      <PageLayout
+        head={<Head title="Магазин" />}
+        cartInfo={<CartInfo count={countCart} sum={sumCart} />}
+        controls={  <Controls controlTitle="Перейти" controlFunc={callbacks.onShowModal} />}
+      >
         <List
           list={list}
           controlTitle="Добавить"
@@ -60,16 +58,17 @@ function App({ store }) {
       </PageLayout>
       {
         showModal &&
-        <Modal
-          count={countCart}
-          sum={sumCart}
-          list={<List list={cart} controlTitle="Удалить" controlFunc={callbacks.deleteItemFromCart}/>}
-          onShowModal={callbacks.onShowModal}
-        >
-          <Head title="Корзина" addClass='Modal-head'>
-            <Controls controlTitle="Закрыть" controlFunc={callbacks.onShowModal}/>
-          </Head>
-        </Modal>
+        <ModalLayout onModalClick={callbacks.onShowModal}>
+          <Cart
+            title="Корзина"
+            sum={sumCart}
+            countCart={countCart}
+            controlTitle="Закрыть"
+            controlFunc={callbacks.onShowModal}
+          >
+            <List isCart={true} list={cart} controlTitle="Удалить" controlFunc={callbacks.deleteItemFromCart}/>
+          </Cart>
+        </ModalLayout>
       }
     </>
   );

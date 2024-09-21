@@ -5,8 +5,7 @@ import { generateCode } from './utils';
  */
 class Store {
   constructor(initState = {}) {
-    this.state = initState;
-    this.state.cart=[];
+    this.state = {...initState, cart: []};
     this.listeners = []; // Слушатели изменений состояния
   }
 
@@ -105,7 +104,7 @@ class Store {
           {...repeatItem, count: repeatItem.count + 1}];
       this.setCart(newCart);
     } else {
-      this.setCart([...this.getState().cart, {...item, count: 1}]);
+      this.setCart([...this.getState().cart, {...item, count: item.count || 1}]);
     }
   }
 
@@ -113,9 +112,9 @@ class Store {
    * Удаление товара из корзины
    * @param item {Object}
    */
-  deleteItemFromCart(item) {
+  deleteItemFromCart(code) {
     this.setCart(
-      [...this.state.cart.filter(elem => elem.code !== item.code)])
+      [...this.state.cart.filter(elem => elem.code !== code)])
   }
 
   /**
@@ -131,7 +130,8 @@ class Store {
    * @returns Number
    */
   getSumOfCart() {
-    return this.state.cart.reduce((acc, elem) => acc + elem.count  * elem.price, 0)
+    return this.state.cart
+      .reduce((acc, elem) => (acc + elem.count  * (elem.price || 0)), 0)
   }
 }
 

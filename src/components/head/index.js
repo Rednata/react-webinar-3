@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './style.css';
 
-function Head({ title = '', addClass = '', children = '' }) {
+function Head({ title = '',  children = '' }) {
 
   return (
-    <div className={addClass ? `Head ${addClass}` : `Head`}>
+    <div className="Head">
       <h1>{title}</h1>
       {children}
     </div>

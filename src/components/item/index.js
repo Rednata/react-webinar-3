@@ -23,10 +23,6 @@ function Item({item, controlTitle = "", controlFunc = () => {}}) {
       <div className="Item-price">
         {separateDigits(item.price)}&nbsp;₽
       </div>
-      {
-        item.count &&
-        <div className="Item-count">{item.count}&nbsp;шт</div>
-      }
       <Controls controlTitle={controlTitle} controlFunc={callbacks.controlFunc}/>
     </div>
   );
@@ -36,8 +32,7 @@ Item.propTypes = {
   item: PropTypes.shape({
     code: PropTypes.number,
     title: PropTypes.string,
-    selected: PropTypes.bool,
-    count: PropTypes.number,
+    price: PropTypes.number,
   }).isRequired,
   controlTitle: PropTypes.string,
   controlFunc: PropTypes.func

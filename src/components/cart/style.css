@@ -1,0 +1,37 @@
+.Cart {
+  padding-bottom: 70px;
+}
+
+.Cart-content {
+  padding-top: 79px;
+}
+
+.Cart-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 10px 10px 0 0;
+  background-color: #f5f5f5;
+}
+
+.Cart-head .Controls {
+  display: block;
+}
+
+.Cart-empty {
+  text-align: center;
+  font-weight: 700;
+  font-size: 26px;
+}
+
+.Cart-footer {
+  display: flex;
+  justify-content: flex-end;
+  column-gap: 50px;
+  font-weight: 700;
+  font-size: 18px;
+  padding-right: 120px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  /* padding-bottom: 40px; */
+}

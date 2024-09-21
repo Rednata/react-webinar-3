@@ -51,4 +51,4 @@ export function generateCode2() {
   return generateCode2.value ? ++generateCode2.value : (generateCode2.value = 1);
 }
 
-export const separateDigits = (num) => num.toLocaleString();
+export const separateDigits = (num = 0) => num.toLocaleString();

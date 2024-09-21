@@ -6,7 +6,7 @@ function Controls({ controlTitle= '', controlFunc = () => {} }) {
 
   return (
     <div className="Controls">
-      <button onClick={controlFunc}>{controlTitle}</button>
+      <button className="Controls-btn" onClick={controlFunc}>{controlTitle}</button>
     </div>
   );
 }
