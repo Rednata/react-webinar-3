@@ -6,6 +6,8 @@ import PageLayout from './components/page-layout';
 import ModalLayout from './components/modal-layout';
 import CartInfo from './components/cart-info';
 import Cart from './components/cart';
+import Item from './components/item';
+import ItemCart from './components/item-cart';
 
 /**
  * Приложение
@@ -40,6 +42,16 @@ function App({ store }) {
     deleteItemFromCart: useCallback((code) => {
       store.deleteItemFromCart(code);
     }, [store]),
+
+    renderItem: useCallback(
+      (item, controlTitle, controlFunc) => {
+        return (<Item item={item} controlTitle={controlTitle} controlFunc={controlFunc}/>)
+      }, [store]),
+
+    renderItemCart: useCallback(
+      (item, controlTitle, controlFunc) => {
+        return (<ItemCart item={item} controlTitle={controlTitle} controlFunc={controlFunc}/>)
+      }, [store])
   };
 
   return (
@@ -54,6 +66,7 @@ function App({ store }) {
           controlTitle="Добавить"
           controlFunc={callbacks.addItemToCart}
           onDeleteItem={callbacks.onDeleteItem}
+          renderItem={callbacks.renderItem}
         />
       </PageLayout>
       {
@@ -66,7 +79,12 @@ function App({ store }) {
             controlTitle="Закрыть"
             controlFunc={callbacks.onShowModal}
           >
-            <List isCart={true} list={cart} controlTitle="Удалить" controlFunc={callbacks.deleteItemFromCart}/>
+            <List
+              list={cart}
+              controlTitle="Удалить"
+              controlFunc={callbacks.deleteItemFromCart}
+              renderItem={callbacks.renderItemCart}
+            />
           </Cart>
         </ModalLayout>
       }

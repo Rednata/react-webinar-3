@@ -4,7 +4,7 @@ import { separateDigits } from '../../utils';
 import './style.css';
 import Controls from '../controls';
 
-function Item({item, controlTitle = "", controlFunc = () => {}}) {
+function Item({item, controlTitle, controlFunc}) {
 
   const callbacks = {
     controlFunc: () => {
