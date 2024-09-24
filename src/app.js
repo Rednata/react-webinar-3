@@ -6,6 +6,8 @@ import PageLayout from './components/page-layout';
 import ModalLayout from './components/modal-layout';
 import Item from './components/item';
 import ItemBasket from './components/item-basket';
+import BasketTool from './components/basket-tool';
+import BasketTotal from './components/basket-total';
 
 /**
  * Приложение
@@ -37,7 +39,7 @@ function App({ store }) {
       store.addItem();
     }, [store]),
 
-    openModalBasketn: useCallback(() => {
+    openModalBasket: useCallback(() => {
       setModal('basket')
     }, [setModal]),
 
@@ -60,7 +62,7 @@ function App({ store }) {
     <>
       <PageLayout>
         <Head title="Приложение на чистом JS" />
-        <Controls onAdd={callbacks.openModalBasketn} />
+        <BasketTool onOpen={callbacks.openModalBasket}/>
         <List
           list={list}
           renderItem={renders.item}
@@ -73,6 +75,7 @@ function App({ store }) {
               list={list}
               renderItem={renders.itemBasket}
             />
+            <BasketTotal />
           </ModalLayout>
         )
       }
