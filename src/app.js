@@ -8,6 +8,7 @@ import Item from './components/item';
 import ItemBasket from './components/item-basket';
 import BasketTool from './components/basket-tool';
 import BasketTotal from './components/basket-total';
+import { addToBasket, removeFromBasket } from './store/basket';
 
 /**
  * Приложение
@@ -22,11 +23,11 @@ function App({ store }) {
 
   const callbacks = {
     addToBasket: useCallback((code) => {
-      store.addToBasket(code)
+      addToBasket(code)
     }, [store]),
 
     removeFromBasket: useCallback((code) => {
-      store.removeFromBasket(code)
+      removeFromBasket(code)
     }, [store]),
 
     openModalBasket: useCallback(() => {

@@ -23,7 +23,7 @@ function Item(props) {
           <div className={cn('price')}>{numberFormat(props.item.amount || 0)} шт</div>
         </div>
         <div className={cn('cell')}>
-          <button onClick={callbacks.onRemove}>Добавить</button>
+          <button onClick={callbacks.onRemove}>Удалить</button>
         </div>
       </div>
     </div>
