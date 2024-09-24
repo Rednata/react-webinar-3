@@ -8,7 +8,6 @@ import Item from './components/item';
 import ItemBasket from './components/item-basket';
 import BasketTool from './components/basket-tool';
 import BasketTotal from './components/basket-total';
-import { addToBasket, removeFromBasket } from './store/basket';
 
 /**
  * Приложение
@@ -17,26 +16,26 @@ import { addToBasket, removeFromBasket } from './store/basket';
  */
 function App({ store }) {
 
-  const [modal, setModal] = useState(null);
+  // const [modal, setModal] = useState(null);
 
   const state = store.getState();
 
   const callbacks = {
     addToBasket: useCallback((code) => {
-      addToBasket(code)
+      store.actions.basket.addToBasket(code)
     }, [store]),
 
     removeFromBasket: useCallback((code) => {
-      removeFromBasket(code)
+      store.actions.basket.removeFromBasket(code)
     }, [store]),
 
     openModalBasket: useCallback(() => {
-      setModal('basket')
-    }, [setModal]),
+      store.actions.modals.open('basket')
+    }, [store]),
 
     closeModal: useCallback(() => {
-      setModal(null)
-    }, [setModal]),
+      store.actions.modals.close()
+    }, [store]),
   };
 
   const renders = {
@@ -59,12 +58,12 @@ function App({ store }) {
           amount={state.basket.amount}
         />
         <List
-          list={state.list}
+          list={state.catalog.list}
           renderItem={renders.item}
         />
       </PageLayout>
       {
-        modal === 'basket' && (
+        state.modals.name === 'basket' && (
           <ModalLayout title='Корзина' onClose={callbacks.closeModal}>
             <List
               list={state.basket.list}
