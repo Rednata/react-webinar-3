@@ -8,7 +8,9 @@ function Item(props) {
   const cn = bem('Item');
 
   const callbacks = {
-    onAdd: e => props.onAdd(props.item.code),
+    onAdd: e => {
+      props.onAdd(props.item.code)
+    },
   };
 
   return (

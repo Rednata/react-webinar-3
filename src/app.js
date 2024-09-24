@@ -18,25 +18,15 @@ function App({ store }) {
 
   const [modal, setModal] = useState(null);
 
-  const list = store.getState().list;
+  const state = store.getState();
 
   const callbacks = {
-    onDeleteItem: useCallback(
-      code => {
-        store.deleteItem(code);
-      },
-      [store],
-    ),
+    addToBasket: useCallback((code) => {
+      store.addToBasket(code)
+    }, [store]),
 
-    onSelectItem: useCallback(
-      code => {
-        store.selectItem(code);
-      },
-      [store],
-    ),
-
-    onAddItem: useCallback(() => {
-      store.addItem();
+    removeFromBasket: useCallback((code) => {
+      store.removeFromBasket(code)
     }, [store]),
 
     openModalBasket: useCallback(() => {
@@ -50,21 +40,25 @@ function App({ store }) {
 
   const renders = {
     item: useCallback((item) => {
-      return (<Item item={item} onAdd={callbacks.onDeleteItem} />)
-    }, [callbacks.onDeleteItem]),
+      return (<Item item={item} onAdd={callbacks.addToBasket} />)
+    }, [callbacks.addToBasket]),
 
     itemBasket: useCallback((item) => {
-      return (<ItemBasket item={item} onRemove={callbacks.onDeleteItem} />)
-    }, [callbacks.onDeleteItem])
+      return (<ItemBasket item={item} onRemove={callbacks.removeFromBasket} />)
+    }, [callbacks.removeFromBasket])
   }
 
   return (
     <>
       <PageLayout>
         <Head title="Приложение на чистом JS" />
-        <BasketTool onOpen={callbacks.openModalBasket}/>
+        <BasketTool
+          onOpen={callbacks.openModalBasket}
+          sum={state.basket.sum}
+          amount={state.basket.amount}
+        />
         <List
-          list={list}
+          list={state.list}
           renderItem={renders.item}
         />
       </PageLayout>
@@ -72,10 +66,10 @@ function App({ store }) {
         modal === 'basket' && (
           <ModalLayout title='Корзина' onClose={callbacks.closeModal}>
             <List
-              list={list}
+              list={state.basket.list}
               renderItem={renders.itemBasket}
             />
-            <BasketTotal />
+            <BasketTotal sum={state.basket.sum}/>
           </ModalLayout>
         )
       }

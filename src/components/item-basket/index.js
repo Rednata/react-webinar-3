@@ -20,7 +20,7 @@ function Item(props) {
           <div className={cn('price')}>{numberFormat(props.item.price)} ₽</div>
         </div>
         <div className={cn('cell')}>
-          <div className={cn('price')}>{numberFormat(props.item.amount || 0)} ₽</div>
+          <div className={cn('price')}>{numberFormat(props.item.amount || 0)} шт</div>
         </div>
         <div className={cn('cell')}>
           <button onClick={callbacks.onRemove}>Добавить</button>

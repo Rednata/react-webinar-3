@@ -40,6 +40,46 @@ class Store {
     for (const listener of this.listeners) listener();
   }
 
+  addToBasket(code) {
+    let sum = 0;
+    let exist = false;
+    const list = this.getState().basket.list.map(item => {
+      let result = item;
+      if (item.code === code) {
+        exist = true;
+        result = {...item, amount: item.amount + 1 }
+      }
+      sum += result.price * result.amount;
+      return result
+    })
+
+    if (!exist) {
+      const item = this.getState().list.find(item => item.code === code);
+      list.push({...item, amount: 1})
+      console.log('item: ', item);
+      sum += item.price
+    }
+    console.log('list: ', this.getState());
+
+    this.setState({
+      ...this.state,
+      basket: {...this.state.basket, list, sum, amount: list.length}
+    })
+  }
+
+  removeFromBasket(code) {
+    let sum = 0;
+    const list = this.getState().basket.list.filter(item => {
+      if (item.code === code) return false;
+      sum += item.price * item.amount
+      return true
+    })
+
+    this.setState({
+      ...this.state, 
+      basket: {...this.state.basket, list, sum, amount: list.length}
+    })
+  }
   /**
    * Добавление новой записи
    */
