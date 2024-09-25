@@ -60,3 +60,7 @@ export function generateCode2() {
 export function numberFormat(value, locale = 'ru-RU', options = {}) {
   return new Intl.NumberFormat(locale, options).format(value);
 }
+
+// // генерация URL
+// const url_api = new URL('/api/v1/articles');
+// const params = new URLSearchParams()

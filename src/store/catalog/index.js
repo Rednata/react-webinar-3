@@ -5,32 +5,50 @@ class Catalog extends StoreModule {
   constructor(store, name) {
     super(store, name);
     this.generateCode = generateCode(0)
-    // this.store = store;
   }
 
   initState() {
     return {
-      list: [
-        // { code: generateCode(), title: 'Название товара', price: 100.0 },
-        // { code: generateCode(), title: 'Книга про React', price: 770 },
-        // { code: generateCode(), title: 'Конфета', price: 33 },
-        // { code: generateCode(), title: 'Трактор', price: 7955320 },
-        // { code: generateCode(), title: 'Телефон iPhone XIXV', price: 120000 },
-        // { code: generateCode(), title: 'Карандаши цветные', price: 111 },
-        // { code: generateCode(), title: 'Товар сюрприз', price: 0 },
-      ],
+      list: [],
+      pages: {
+        current: 1,
+        limit: 10,
+        last:1,
+      }
     }
   }
 
-  async load() {
-    const response = await fetch('/api/v1/articles');
+  async loadFirst() {
+    const response = await fetch('/api/v1/articles?limit=10&skip=0&fields=items(_id, title, price),count');
     const json = await response.json();
+    const last = Math.ceil(json.result.count / this.getState().pages.limit)
+
     this.setState({
       ...this.getState(),
-      list: json.result.items
+      list: json.result.items,
+      pages: {...this.getState().pages, last: last}
     })
   }
 
+  async load(num, limit=10) {
+    const skip = (num - 1) * limit;
+    const response = await fetch(`/api/v1/articles?limit=${limit}&skip=${skip}`);
+    const json = await response.json();
+
+    this.setState({
+      ...this.getState(),
+      list: json.result.items,
+    })
+  }
+
+  changeActiveNumPage(num) {
+    console.warn('num: ', num);
+    this.setState({
+      ...this.getState(),
+      pages: {...this.getState().pages, current: num}
+    })
+
+  }
   /**
    * Добавление новой записи
    */

@@ -8,11 +8,16 @@
   cursor: pointer;
 }
 
+.PaginationBtn:hover {
+  background-color: #e1e1e1;
+}
+
 .PaginationBtn-active {
   color: #fff;
   background-color: #0087e9;
+  cursor: default
 }
 
-.PaginationBtn:hover {
-  background-color: #e1e1e1;
+.PaginationBtn-active:hover {
+  background-color: #0087e9;
 }

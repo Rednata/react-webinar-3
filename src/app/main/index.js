@@ -8,24 +8,31 @@ import useStore from '../../store/use-store';
 import useSelector from '../../store/use-selector';
 import PaginationLayout from '../../components/pagination-layout';
 import PaginationBtn from '../../components/pagination-btn';
+import Pagination from '../pagination';
 
-console.log('PaginationLayout: ', PaginationLayout);
 function Main() {
 
   const store = useStore()
-
-  useEffect(() => {
-    store.actions.catalog.load()
-  }, [])
 
   const select = useSelector(state => {
 
     return ({
       list: state.catalog.list,
       amount: state.basket.amount,
-      sum: state.basket.sum
+      sum: state.basket.sum,
+      currentPage: state.catalog.pages.current
   })
 }, 'Main');
+
+console.log('select: ', select);
+
+  useEffect(() => {
+    store.actions.catalog.load(select.currentPage)
+  }, [select.currentPage])
+
+  useEffect(() => {
+    store.actions.catalog.loadFirst()
+  }, [])
 
   const callbacks = {
     addToBasket: useCallback((code) => {
@@ -55,11 +62,7 @@ function Main() {
           list={select.list}
           renderItem={renders.item}
         />
-        <PaginationLayout>
-          <PaginationBtn num={1}/>
-          <PaginationBtn num={2}/>
-          <PaginationBtn num={120}/>
-        </PaginationLayout>
+        <Pagination />
       </PageLayout>
   );
 }
