@@ -2,8 +2,8 @@ import { generateCode } from "../../utils";
 import StoreModule from "../module";
 
 class Catalog extends StoreModule {
-  constructor() {
-    super();
+  constructor(store, name) {
+    super(store, name);
     this.generateCode = generateCode(0)
     // this.store = store;
   }
@@ -24,14 +24,11 @@ class Catalog extends StoreModule {
 
   async load() {
     const response = await fetch('/api/v1/articles');
-    // const response = await fetch('http://query.rest/api/v1/articles');
-    console.log('================', response);
     const json = await response.json();
-    console.log('json: ', json.result);
-    // this.setState({
-    //   ...this.getState(),
-    //   list: json.result.items
-    // })
+    this.setState({
+      ...this.getState(),
+      list: json.result.items
+    })
   }
 
   /**

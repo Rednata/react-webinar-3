@@ -6,7 +6,10 @@ import Item from '../../components/item';
 import BasketTool from '../../components/basket-tool';
 import useStore from '../../store/use-store';
 import useSelector from '../../store/use-selector';
+import PaginationLayout from '../../components/pagination-layout';
+import PaginationBtn from '../../components/pagination-btn';
 
+console.log('PaginationLayout: ', PaginationLayout);
 function Main() {
 
   const store = useStore()
@@ -52,6 +55,11 @@ function Main() {
           list={select.list}
           renderItem={renders.item}
         />
+        <PaginationLayout>
+          <PaginationBtn num={1}/>
+          <PaginationBtn num={2}/>
+          <PaginationBtn num={120}/>
+        </PaginationLayout>
       </PageLayout>
   );
 }

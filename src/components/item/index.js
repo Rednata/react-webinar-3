@@ -9,13 +9,13 @@ function Item(props) {
 
   const callbacks = {
     onAdd: e => {
-      props.onAdd(props.item.code)
+      props.onAdd(props.item._id)
     },
   };
 
   return (
     <div className={cn()}>
-      <div className={cn('code')}>{props.item.code}</div>
+      {/* <div className={cn('code')}>{props.item._id}</div> */}
       <div className={cn('title')}>{props.item.title}</div>
       <div className={cn('actions')}>
         <div className={cn('price')}>{numberFormat(props.item.price)} ₽</div>

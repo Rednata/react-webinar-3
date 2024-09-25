@@ -8,12 +8,12 @@ function Item(props) {
   const cn = bem('ItemBasket');
 
   const callbacks = {
-    onRemove: e => props.onRemove(props.item.code),
+    onRemove: e => props.onRemove(props.item._id),
   };
 
   return (
     <div className={cn()}>
-      <div className={cn('code')}>{props.item.code}</div>
+      {/* <div className={cn('code')}>{props.item._id}</div> */}
       <div className={cn('title')}>{props.item.title}</div>
       <div className={cn('right')}>
         <div className={cn('cell')}>

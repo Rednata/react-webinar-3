@@ -25,7 +25,7 @@ class Basket extends StoreModule {
     })
 
     if (!exist) {
-      const item = this.store.getState().catalog.list.find(item => item.code === code);
+      const item = this.store.getState().catalog.list.find(item => item._id === code);
       list.push({...item, amount: 1})
       sum += item.price
     }
@@ -42,7 +42,7 @@ class Basket extends StoreModule {
   removeFromBasket(code) {
     let sum = 0;
     const list = this.store.getState().basket.list.filter(item => {
-      if (item.code === code) return false;
+      if (item._id === code) return false;
       sum += item.price * item.amount
       return true
     })
