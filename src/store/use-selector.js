@@ -14,7 +14,7 @@ export default function useSelector(selector, desc = '') {
       const newState = selector(store.getState());
       setState(prevState => {
         const eq = shallowequal(prevState, newState);
-        console.log(eq ?  `No changes - ${desc}` : `Changes - ${desc}`);
+        // console.log(eq ?  `No changes - ${desc}` : `Changes - ${desc}`);
         return shallowequal(prevState, newState) ? prevState : newState
       })
     })

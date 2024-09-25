@@ -6,8 +6,6 @@ import Item from '../../components/item';
 import BasketTool from '../../components/basket-tool';
 import useStore from '../../store/use-store';
 import useSelector from '../../store/use-selector';
-import PaginationLayout from '../../components/pagination-layout';
-import PaginationBtn from '../../components/pagination-btn';
 import Pagination from '../pagination';
 
 function Main() {
@@ -24,8 +22,6 @@ function Main() {
   })
 }, 'Main');
 
-console.log('select: ', select);
-
   useEffect(() => {
     store.actions.catalog.load(select.currentPage)
   }, [select.currentPage])
@@ -40,8 +36,6 @@ console.log('select: ', select);
     }, [store]),
 
     openModalBasket: useCallback(() => {
-      console.log('basket');
-      
       store.actions.modals.open('basket')
     }, [store]),
   };
