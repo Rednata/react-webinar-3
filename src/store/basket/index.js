@@ -12,8 +12,6 @@ class Basket extends StoreModule {
   }
 
   addToBasket(code) {
-    console.log(this.store.getState());
-    
     let sum = 0;
     let exist = false;
     const list = this.getState().list.map(item => {

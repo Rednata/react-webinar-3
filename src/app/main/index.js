@@ -4,10 +4,20 @@ import List from '../../components/list';
 import Head from '../../components/head';
 import Item from '../../components/item';
 import BasketTool from '../../components/basket-tool';
+import useStore from '../../store/use-store';
+import useSelector from '../../store/use-selector';
 
-function Main({ store }) {
+function Main() {
 
-  const state = store.getState();
+  const store = useStore()
+  const select = useSelector(state => {
+
+    return ({
+      list: state.catalog.list,
+      amount: state.basket.amount,
+      sum: state.basket.sum
+  })
+}, 'Main');
 
   const callbacks = {
     addToBasket: useCallback((code) => {
@@ -30,15 +40,15 @@ function Main({ store }) {
         <Head title="Приложение на чистом JS" />
         <BasketTool
           onOpen={callbacks.openModalBasket}
-          sum={state.basket.sum}
-          amount={state.basket.amount}
+          sum={select.sum}
+          amount={select.amount}
         />
         <List
-          list={state.catalog.list}
+          list={select.list}
           renderItem={renders.item}
         />
       </PageLayout>
   );
 }
 
-export default Main;
+export default React.memo(Main);

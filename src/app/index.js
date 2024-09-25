@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Basket from './basket';
 import Main from './main';
+import { StoreContext } from '../store/context';
+import useStore from '../store/use-store';
+import useSelector from '../store/use-selector';
 
 
 /**
@@ -8,16 +11,16 @@ import Main from './main';
  * @param store {Store} Хранилище состояния приложения
  * @returns {React.ReactElement}
  */
-function App({ store }) {
+function App({ }) {
 
-  const state = store.getState();
-  console.log('state: ', state);
+  const activeModal = useSelector(state => state.modals.name, 'App');
+
 
   return (
     <>
-      <Main store={store} />
+      <Main />
       {
-        state.modals.name === 'basket' && <Basket store={store}/>
+        activeModal === 'basket' && <Basket />
       }
     </>
   );

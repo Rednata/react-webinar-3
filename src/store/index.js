@@ -2,7 +2,6 @@ import { generateCode } from '../utils';
 import Basket from './basket';
 import Catalog from './catalog';
 import * as modules from './exports';
-console.log(' modules: ',  modules);
 
 /**
  * Хранилище состояния приложения

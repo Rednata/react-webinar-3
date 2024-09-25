@@ -3,12 +3,17 @@ import List from '../../components/list';
 import ModalLayout from '../../components/modal-layout';
 import ItemBasket from '../../components/item-basket';
 import BasketTotal from '../../components/basket-total';
+import useStore from '../../store/use-store';
+import useSelector from '../../store/use-selector';
 
-function Basket({ store }) {
-  console.log('store: ', store);
+function Basket() {
+  const store = useStore()
 
-  const state = store.getState();
-  console.warn('state: ', state);
+  const select = useSelector(state => ({
+    list: state.basket.list,
+    amount: state.basket.amount,
+    sum: state.basket.sum
+  }), 'Basket');
 
   const callbacks = {
     removeFromBasket: useCallback((code) => {
@@ -29,12 +34,12 @@ function Basket({ store }) {
   return (
     <ModalLayout title='Корзина' onClose={callbacks.closeModal}>
       <List
-        list={state.basket.list}
+        list={select.list}
         renderItem={renders.itemBasket}
       />
-      <BasketTotal sum={state.basket.sum}/>
+      <BasketTotal sum={select.sum}/>
     </ModalLayout>
   )
 }
 
-export default Basket;
+export default React.memo(Basket);
