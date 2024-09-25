@@ -1,22 +1,37 @@
 import { generateCode } from "../../utils";
+import StoreModule from "../module";
 
-class Catalog {
-  constructor(store) {
-    this.store = store;
+class Catalog extends StoreModule {
+  constructor() {
+    super();
+    this.generateCode = generateCode(0)
+    // this.store = store;
   }
 
   initState() {
     return {
       list: [
-        { code: generateCode(), title: 'Название товара', price: 100.0 },
-        { code: generateCode(), title: 'Книга про React', price: 770 },
-        { code: generateCode(), title: 'Конфета', price: 33 },
-        { code: generateCode(), title: 'Трактор', price: 7955320 },
-        { code: generateCode(), title: 'Телефон iPhone XIXV', price: 120000 },
-        { code: generateCode(), title: 'Карандаши цветные', price: 111 },
-        { code: generateCode(), title: 'Товар сюрприз', price: 0 },
+        // { code: generateCode(), title: 'Название товара', price: 100.0 },
+        // { code: generateCode(), title: 'Книга про React', price: 770 },
+        // { code: generateCode(), title: 'Конфета', price: 33 },
+        // { code: generateCode(), title: 'Трактор', price: 7955320 },
+        // { code: generateCode(), title: 'Телефон iPhone XIXV', price: 120000 },
+        // { code: generateCode(), title: 'Карандаши цветные', price: 111 },
+        // { code: generateCode(), title: 'Товар сюрприз', price: 0 },
       ],
     }
+  }
+
+  async load() {
+    const response = await fetch('/api/v1/articles');
+    // const response = await fetch('http://query.rest/api/v1/articles');
+    console.log('================', response);
+    const json = await response.json();
+    console.log('json: ', json.result);
+    // this.setState({
+    //   ...this.getState(),
+    //   list: json.result.items
+    // })
   }
 
   /**
