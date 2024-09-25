@@ -1,8 +1,4 @@
 .List {
-<<<<<<< HEAD
-  margin-bottom: 20px;
-=======
->>>>>>> upstream/lecture-3
 }
 
 .List-item {
@@ -11,8 +7,4 @@
 
 .List-item:first-child {
   border-top: 1px dashed #ccc;
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> upstream/lecture-3

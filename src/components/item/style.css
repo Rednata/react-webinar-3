@@ -1,13 +1,8 @@
 .Item {
   display: flex;
   justify-content: flex-start;
-<<<<<<< HEAD
-  align-items: center;
-  transition: background-color 1s;
-=======
   transition: background-color 1s;
   padding-left: 10px;
->>>>>>> upstream/lecture-3
 }
 
 .Item_selected {
@@ -15,36 +10,16 @@
   color: #fff;
 }
 
-<<<<<<< HEAD
-.Item-code,
-.Item-price,
-.Item-count {
-  font-size: 18px;
-  padding: 20px 10px 20px 20px;
-}
-
-.Item-price,
-.Item-count {
-  color: #404040;
-}
-
-=======
 .Item-code {
   padding: 20px 10px 20px 20px;
 }
 
->>>>>>> upstream/lecture-3
 .Item-title {
   width: 100%;
   padding: 20px 10px;
 }
 
 .Item-actions {
-<<<<<<< HEAD
-  display: flex;
-  justify-content: flex-end;
-  padding: 20px 20px 20px 10px;
-=======
   padding: 20px 20px 20px 10px;
   display: flex;
   justify-content: flex-end;
@@ -56,5 +31,4 @@
   padding: 0 0 0 10px;
   white-space: nowrap;
   font-size: 18px;
->>>>>>> upstream/lecture-3
 }
