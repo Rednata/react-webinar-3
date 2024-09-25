@@ -40,6 +40,8 @@ console.log('select: ', select);
     }, [store]),
 
     openModalBasket: useCallback(() => {
+      console.log('basket');
+      
       store.actions.modals.open('basket')
     }, [store]),
   };

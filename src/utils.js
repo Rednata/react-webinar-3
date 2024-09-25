@@ -64,3 +64,6 @@ export function numberFormat(value, locale = 'ru-RU', options = {}) {
 // // генерация URL
 // const url_api = new URL('/api/v1/articles');
 // const params = new URLSearchParams()
+
+export const formatDate = (date) =>
+  new Date(date).getFullYear();

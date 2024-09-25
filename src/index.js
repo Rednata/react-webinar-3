@@ -1,11 +1,10 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import { generateCode } from './utils.js';
-
 import Store from './store/index.js';
 import App from './app/index.js';
 import { StoreContext } from './store/context.js';
-
+import { RouterProvider } from 'react-router-dom';
+import router from './router.js';
 const store = new Store({});
 
 const root = createRoot(document.getElementById('root'));
@@ -17,6 +16,8 @@ const root = createRoot(document.getElementById('root'));
 // Первый рендер приложения
 root.render(
   <StoreContext.Provider value={store}>
-    <App />
+    <RouterProvider router={router}>
+      <App />
+    </RouterProvider>
   </StoreContext.Provider>
 );
