@@ -20,7 +20,7 @@ class Card extends StoreModule {
         dateCreate: json.result.dateCreate,
         price: json.result.price,
         madeIn: json.result.madeIn.title,
-        currency: json.result.madeIn.code,
+        code: json.result.madeIn.code,
         id: json.result._id,
       }
     })

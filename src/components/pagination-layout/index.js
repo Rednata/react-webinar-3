@@ -4,6 +4,7 @@ import {cn as bem} from  '@bem-react/classname';
 import './style.css'
 
 function PaginationLayout({children}) {
+  console.log('children: ', children);
 
   const cn = bem('PaginationLayout');
 

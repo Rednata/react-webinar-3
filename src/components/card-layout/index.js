@@ -7,16 +7,16 @@ import BasketTool from "../basket-tool";
 import { Link } from "react-router-dom";
 import { formatDate } from "../../utils";
 
-function CardLayout({card, sum, amount, onAdd, openModalBasket}) {
+function CardLayout({card={}, sum=0, amount=0, onAdd=()=>{}, openModalBasket=()=>{}}) {
 
   const {
-    title,
-    category,
-    description,
-    dateCreate,
-    price,
-    madeIn,
-    currency
+    title ='',
+    category = '',
+    description = '',
+    dateCreate = '',
+    price = 0,
+    madeIn = '',
+    code = ''
   } = card;
 
   const cn = bem('CardLayout');
@@ -35,7 +35,7 @@ function CardLayout({card, sum, amount, onAdd, openModalBasket}) {
       <div className={cn('content')}>
         <p className={cn('description')}>{description}</p>
         <p className={cn('country')}>
-          Страна производитель: <span>{madeIn} ({currency})</span>
+          Страна производитель: <span>{madeIn} ({code})</span>
         </p>
         <p className={cn('category')}>Категория: <span>{category}</span></p>
         <p className={cn('year')}>
