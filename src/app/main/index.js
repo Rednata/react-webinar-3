@@ -26,10 +26,6 @@ function Main() {
     store.actions.catalog.load(select.currentPage)
   }, [select.currentPage])
 
-  useEffect(() => {
-    store.actions.catalog.loadFirst()
-  }, [])
-
   const callbacks = {
     addToBasket: useCallback((code) => {
       store.actions.basket.addToBasket(code)

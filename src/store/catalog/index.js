@@ -32,17 +32,24 @@ class Catalog extends StoreModule {
 
   async load(num, limit=10) {
     const skip = (num - 1) * limit;
-    const response = await fetch(`/api/v1/articles?limit=${limit}&skip=${skip}`);
+    const response = await fetch(`/api/v1/articles?limit=${limit}&skip=${skip}&fields=items(*),count`);
     const json = await response.json();
-
-    this.setState({
-      ...this.getState(),
-      list: json.result.items,
-    })
+    const last = Math.ceil(json.result.count / this.getState().pages.limit)
+    if (this.getState().pages.last === last) {
+      this.setState({
+        ...this.getState(),
+        list: json.result.items,
+      })
+    } else {
+      this.setState({
+        ...this.getState(),
+        list: json.result.items,
+        pages: {...this.getState().pages, last: last}
+      })
+    }
   }
 
   changeActiveNumPage(num) {
-    console.warn('num: ', num);
     this.setState({
       ...this.getState(),
       pages: {...this.getState().pages, current: num}
