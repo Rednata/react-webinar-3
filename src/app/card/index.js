@@ -2,7 +2,7 @@ import React, { useCallback, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import useStore from "../../store/use-store";
 import useSelector from "../../store/use-selector";
-
+import { translate } from "../../utils";
 import Basket from "../../app/basket";
 import CardLayout from "../../components/card-layout";
 
@@ -17,7 +17,8 @@ function Card() {
       card: state.card.card,
       activeModal: state.modals.name,
       sum: state.basket.sum,
-      amount: state.basket.amount
+      amount: state.basket.amount,
+      lang: state.catalog.lang,
 
   })
 }, 'Card');
@@ -50,6 +51,9 @@ function Card() {
             amount={select.amount}
             onAdd={callbacks.onAdd}
             openModalBasket={callbacks.openModalBasket}
+            textContentGoto={translate('btnGoto', select.lang)}
+            textContentAdd={translate('btnAdd', select.lang)}
+            textContentLink={translate('linkMain', select.lang)}
             />
       }
      { select.activeModal === "basket" && <Basket /> }

@@ -33,3 +33,7 @@
   font-size: 18px;
   white-space: nowrap;
 }
+
+.ItemBusket-cell > button {
+  min-width: 76px;
+}

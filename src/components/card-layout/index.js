@@ -7,7 +7,13 @@ import BasketTool from "../basket-tool";
 import { Link } from "react-router-dom";
 import { formatDate } from "../../utils";
 
-function CardLayout({card={}, sum=0, amount=0, onAdd=()=>{}, openModalBasket=()=>{}}) {
+function CardLayout({
+  card={}, sum=0, amount=0,
+  onAdd=()=>{}, openModalBasket=()=>{},
+  textContentGoto = 'Перейти',
+  textContentAdd = 'Добавить',
+  textContentLink = 'Главная',
+  }) {
 
   const {
     title ='',
@@ -25,11 +31,12 @@ function CardLayout({card={}, sum=0, amount=0, onAdd=()=>{}, openModalBasket=()=
     <div className={cn()}>
       <Head title={title}/>
       <div className={cn('wraptool')}>
-        <Link to="/" className={cn('link')}>Главная</Link>
+         <Link to="/" className={cn('link')}>{textContentLink}</Link>
         <BasketTool
           onOpen={openModalBasket}
           sum={sum}
           amount={amount}
+          textContentGoto={textContentGoto}
         />
       </div>
       <div className={cn('content')}>
@@ -45,7 +52,7 @@ function CardLayout({card={}, sum=0, amount=0, onAdd=()=>{}, openModalBasket=()=
       </div>
 
       <div className={cn('footer')}>
-        <button onClick={onAdd}>Добавить</button>
+        <button onClick={onAdd}>{textContentAdd}</button>
       </div>
     </div>
   )

@@ -14,7 +14,8 @@ class Catalog extends StoreModule {
         current: 1,
         limit: 10,
         last:1,
-      }
+      },
+      lang: 'RU'
     };
   }
 
@@ -41,6 +42,13 @@ class Catalog extends StoreModule {
     this.setState({
       ...this.getState(),
       pages: {...this.getState().pages, current: num}
+    })
+  }
+
+  changeLang(lang) {
+    this.setState({
+      ...this.getState(),
+      lang
     })
   }
 }

@@ -37,3 +37,17 @@ export function numberFormat(value, locale = 'ru-RU', options = {}) {
 
 export const formatDate = (date) =>
   new Date(date).getFullYear();
+
+const dictionary = {
+    titleShop: {RU: 'Магазин', EN: 'Shop'},
+    titleBasket: {RU: 'Корзина', EN: 'Basket'},
+    btnAdd: {RU: 'Добавить', EN: 'Add'},
+    btnRemove: {RU: 'Удалить', EN: 'Remove'},
+    btnGoto: {RU: 'Перейти', EN: 'Go to'},
+    btnClose: {RU: 'Закрыть', EN: 'Close'},
+    linkMain: {RU: 'Главная', EN: 'Main'},
+}
+
+export const translate = (name, lang) => {
+  return dictionary[name][lang]
+}

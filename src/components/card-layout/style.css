@@ -35,3 +35,7 @@
 .CardLayout-footer {
   padding: 0 20px 20px 20px;
 }
+
+.CardLayout-footer>button {
+  min-width: 76px;
+}
