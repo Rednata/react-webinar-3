@@ -77,8 +77,15 @@ function Main() {
         amount={select.amount}
         sum={select.sum}
         onClickLink={callbacks.changeActiveNum}
-        textContentLinkMain={translate('linkMain', select.lang)}
-        textContentGoto={translate('btnGoto', select.lang)} />
+        basketTranslate={
+            {textInBasket: translate('textInBasket', select.lang),
+              textContentLinkMain: translate('linkMain', select.lang),
+              textInBasketEmpty: translate('textInBasketEmpty', select.lang),
+              textContentGoto: translate('btnGoto', select.lang),
+              pluralLocale: translate('pluralLocale', select.lang),
+              pluralValue: translate('pluralValue', select.lang),
+            }}
+        />
       <List list={select.list} renderItem={renders.item} />
       <PaginationLayout>
         <PaginationBtn num={1} isActive={select.currentPage===1} onclick={callbacks.changeActiveNum}/>

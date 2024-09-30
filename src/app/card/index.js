@@ -52,9 +52,15 @@ function Card() {
             amount={select.amount}
             onAdd={callbacks.onAdd}
             openModalBasket={callbacks.openModalBasket}
-            textContentGoto={translate('btnGoto', select.lang)}
-            textContentLinkMain={translate('linkMain', select.lang)}
             textContentAdd={translate('btnAdd', select.lang)}
+            basketTranslate={
+              {textInBasket: translate('textInBasket', select.lang),
+                textContentLinkMain: translate('linkMain', select.lang),
+                textInBasketEmpty: translate('textInBasketEmpty', select.lang),
+                textContentGoto: translate('btnGoto', select.lang),
+                pluralLocale: translate('pluralLocale', select.lang),
+                pluralValue: translate('pluralValue', select.lang),
+              }}
             />
       }
      { select.activeModal === "basket" && <Basket /> }

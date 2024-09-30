@@ -52,12 +52,29 @@ const dictionary = {
     titleBasket: {RU: 'Корзина', EN: 'Basket'},
     btnAdd: {RU: 'Добавить', EN: 'Add'},
     btnRemove: {RU: 'Удалить', EN: 'Remove'},
-    btnGoto: {RU: 'Перейти', EN: 'Go to'},
     btnClose: {RU: 'Закрыть', EN: 'Close'},
+
+    btnGoto: {RU: 'Перейти', EN: 'Go to'},
     linkMain: {RU: 'Главная', EN: 'Main'},
+    textInBasket: {RU: 'В корзине', EN: 'In Basket'},
+    textInBasketEmpty: {RU: 'пусто', EN: 'empty'},
+    pluralLocale: {RU: 'ru-RU', EN: 'en-US'},
+    pluralValue: {
+      RU: {
+        one: 'товар',
+        few: 'товара',
+        many: 'товаров',
+      },
+      EN: {
+        one: 'good',
+        other: 'goods',
+      }
+    }
 }
 
 export const translate = (name, lang) => {
+  console.log('name: ', name);
+  console.log('name: ', dictionary[name]);
   return dictionary[name][lang]
 }
 

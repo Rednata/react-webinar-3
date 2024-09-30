@@ -4,15 +4,25 @@ import {cn as bem} from '@bem-react/classname';
 import './style.css';
 import Head from "../head";
 import BasketTool from "../basket-tool";
-import { Link } from "react-router-dom";
 import { formatDate, numberFormat } from "../../utils";
+import ControlLang from "../control-lang";
 
 function CardLayout({
   card={}, price = 0, sum=0, amount=0,
   onAdd=()=>{}, openModalBasket=()=>{},
-  textContentGoto = 'Перейти',
-  textContentLinkMain = 'Перейти',
   textContentAdd = 'Добавить',
+  basketTranslate = {
+    textContentGoto: 'Перейти',
+    textInBasket: 'В корзине',
+    textInBasketEmpty: 'Пусто',
+    textContentLinkMain: 'Главная',
+    pluralLocale: 'ru-RU',
+    pluralValue: {
+      one: 'товар',
+      few: 'товара',
+      many: 'товаров',
+    }
+  }
   }) {
 
   const {
@@ -28,14 +38,14 @@ function CardLayout({
 
   return (
     <div className={cn()}>
+      <ControlLang />
       <Head title={title}/>
-        <BasketTool
-          onOpen={openModalBasket}
-          sum={sum}
-          amount={amount}
-          textContentGoto={textContentGoto}
-          textContentLinkMain={textContentLinkMain}
-        />
+      <BasketTool
+        onOpen={openModalBasket}
+        sum={sum}
+        amount={amount}
+        basketTranslate={basketTranslate}
+      />
       <div className={cn('content')}>
         <p className={cn('description')}>{description}</p>
         <p className={cn('country')}>

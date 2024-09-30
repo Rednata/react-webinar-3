@@ -10,8 +10,18 @@ function BasketTool({
   sum = 0, amount = 0,
   onOpen =() => {},
   onClickLink = () => {},
-  textContentGoto = 'Перейти',
-  textContentLinkMain = 'Главная',
+  basketTranslate = {
+    textContentGoto: 'Перейти',
+    textInBasket: 'В корзине',
+    textInBasketEmpty: 'Пусто',
+    textContentLinkMain: 'Главная',
+    pluralLocale: 'ru-RU',
+    pluralValue: {
+      one: 'товар',
+      few: 'товара',
+      many: 'товаров',
+    }
+  }
 }) {
 
   const cn = bem('BasketTool');
@@ -22,19 +32,15 @@ function BasketTool({
   return (
     <div className={cn()}>
       <div className={cn('link')}>
-        <Link to='/catalog/page' onClick={callbacks.onClickLink}>{textContentLinkMain}</Link>
+        <Link to='/catalog/page' onClick={callbacks.onClickLink}>{basketTranslate.textContentLinkMain}</Link>
       </div>
-      <span className={cn('label')}>В корзине:</span>
+      <span className={cn('label')}>{basketTranslate.textInBasket}:</span>
       <span className={cn('total')}>
         {amount
-          ? `${amount} ${plural(amount, {
-              one: 'товар',
-              few: 'товара',
-              many: 'товаров',
-            })} / ${numberFormat(sum)} ₽`
-          : `пусто`}
+          ? `${amount} ${plural(amount, basketTranslate.pluralValue, basketTranslate.pluralLocale)} / ${numberFormat(sum)} ₽`
+          : `${basketTranslate.textInBasketEmpty}`}
       </span>
-      <button className={cn('btn')} onClick={onOpen}>{textContentGoto}</button>
+      <button className={cn('btn')} onClick={onOpen}>{basketTranslate.textContentGoto}</button>
     </div>
   );
 }
