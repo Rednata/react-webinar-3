@@ -5,10 +5,10 @@ import './style.css';
 import Head from "../head";
 import BasketTool from "../basket-tool";
 import { Link } from "react-router-dom";
-import { formatDate } from "../../utils";
+import { formatDate, numberFormat } from "../../utils";
 
 function CardLayout({
-  card={}, sum=0, amount=0,
+  card={}, price = 0, sum=0, amount=0,
   onAdd=()=>{}, openModalBasket=()=>{},
   textContentGoto = 'Перейти',
   textContentAdd = 'Добавить',
@@ -20,7 +20,6 @@ function CardLayout({
     category = '',
     description = '',
     dateCreate = '',
-    price = 0,
     madeIn = '',
     code = ''
   } = card;

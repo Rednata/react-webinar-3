@@ -2,7 +2,7 @@ import React, { useCallback, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import useStore from "../../store/use-store";
 import useSelector from "../../store/use-selector";
-import { translate } from "../../utils";
+import { numberFormat, translate } from "../../utils";
 import Basket from "../../app/basket";
 import CardLayout from "../../components/card-layout";
 
@@ -47,6 +47,7 @@ function Card() {
         isCard &&
           <CardLayout
             card={select.card}
+            price={numberFormat(select.card.price)}
             sum={select.sum}
             amount={select.amount}
             onAdd={callbacks.onAdd}
