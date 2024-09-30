@@ -7,17 +7,6 @@
   box-shadow: 0 0 15px 5px #0000003b;
 }
 
-.CardLayout-wraptool {
-  display: flex;
-  justify-content: space-between;
-}
-
-.CardLayout-link {
-  font-size: 18px;
-  color: #0087e9;
-  padding: 20px;
-}
-
 .CardLayout-content {
   font-size: 18px;
   padding: 20px;

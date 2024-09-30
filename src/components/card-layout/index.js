@@ -29,15 +29,12 @@ function CardLayout({
   return (
     <div className={cn()}>
       <Head title={title}/>
-      <div className={cn('wraptool')}>
-         <Link to="/" className={cn('link')}>{textContentLink}</Link>
         <BasketTool
           onOpen={openModalBasket}
           sum={sum}
           amount={amount}
           textContentGoto={textContentGoto}
         />
-      </div>
       <div className={cn('content')}>
         <p className={cn('description')}>{description}</p>
         <p className={cn('country')}>

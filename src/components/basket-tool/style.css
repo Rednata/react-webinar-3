@@ -9,6 +9,16 @@
 .BasketTool-label {
 }
 
+.BasketTool-link {
+  flex-grow: 1;
+}
+
+.BasketTool-link>a {
+  color: #0087e9;
+  padding: 20px;
+  padding-left: 0;
+}
+
 .BasketTool-total {
   font-weight: bold;
   margin: 0 20px;
