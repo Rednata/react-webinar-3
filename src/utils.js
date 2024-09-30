@@ -38,6 +38,15 @@ export function numberFormat(value, locale = 'ru-RU', options = {}) {
 export const formatDate = (date) =>
   new Date(date).getFullYear();
 
+/**
+ * Добавление ссылки для переданного объекта
+ * @param item {Object}
+ * @returns {Object}
+ */
+export const addLinkToItem = (item) => {
+  return ({...item, link: `/item/id:${item._id}`})
+}
+
 const dictionary = {
     titleShop: {RU: 'Магазин', EN: 'Shop'},
     titleBasket: {RU: 'Корзина', EN: 'Basket'},

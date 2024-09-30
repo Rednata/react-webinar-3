@@ -7,6 +7,7 @@ import './style.css';
 import { Link } from 'react-router-dom';
 
 function ItemBasket(props) {
+  console.log('props: ', props);
   const cn = bem('ItemBasket');
 
   const callbacks = {
@@ -17,7 +18,7 @@ function ItemBasket(props) {
     <div className={cn()}>
       {/*<div className={cn('code')}>{props.item._id}</div>*/}
       <div className={cn('title')} >
-        <Link className={cn('link')} to={`/item/id:${props.item._id}`} onClick={props.onCloseModal}>
+        <Link className={cn('link')} to={props.item.link} onClick={props.onCloseModal}>
           {props.item.title}
         </Link>
       </div>

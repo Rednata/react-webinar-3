@@ -1,3 +1,4 @@
+import { addLinkToItem } from "../../utils";
 import StoreModule from "../module";
 
 class Card extends StoreModule {
@@ -10,18 +11,19 @@ class Card extends StoreModule {
   async load(id) {
     const response = await fetch(`/api/v1/articles/${id}?fields=*,madeIn(title,code),category(title)`);
     const json = await response.json();
-
+    const cardWithLink = addLinkToItem(json.result)
     this.setState({
       ...this.getState(),
       card: {
-        title: json.result.title,
-        category: json.result.category.title,
-        description: json.result.description,
-        dateCreate: json.result.dateCreate,
-        price: json.result.price,
-        madeIn: json.result.madeIn.title,
-        code: json.result.madeIn.code,
-        _id: json.result._id,
+        title: cardWithLink.title,
+        category: cardWithLink.category.title,
+        description: cardWithLink.description,
+        dateCreate: cardWithLink.dateCreate,
+        price: cardWithLink.price,
+        madeIn: cardWithLink.madeIn.title,
+        code: cardWithLink.madeIn.code,
+        _id: cardWithLink._id,
+        link: cardWithLink.link
       }
     })
   }

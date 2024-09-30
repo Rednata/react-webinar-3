@@ -1,4 +1,4 @@
-import { codeGenerator } from '../../utils';
+import { addLinkToItem, codeGenerator } from '../../utils';
 import StoreModule from '../module';
 
 class Catalog extends StoreModule {
@@ -19,20 +19,25 @@ class Catalog extends StoreModule {
     };
   }
 
+  setItemLinks(json) {
+    return json.map(addLinkToItem)
+  }
+
   async load(num, limit=10) {
     const skip = (num - 1) * limit;
     const response = await fetch(`/api/v1/articles?limit=${limit}&skip=${skip}&fields=items(*),count`);
     const json = await response.json();
     const last = Math.ceil(json.result.count / this.getState().pages.limit)
+    const arrWithItemsLink = this.setItemLinks(json.result.items);
     if (this.getState().pages.last === last) {
       this.setState({
         ...this.getState(),
-        list: json.result.items,
+        list: arrWithItemsLink,
       }, 'Загружены товары из АПИ')
     } else {
       this.setState({
         ...this.getState(),
-        list: json.result.items,
+        list: arrWithItemsLink,
         pages: {...this.getState().pages, last: last}
       }, 'Загружены товары из АПИ')
     }
