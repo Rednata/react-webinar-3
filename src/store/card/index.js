@@ -21,7 +21,7 @@ class Card extends StoreModule {
         price: json.result.price,
         madeIn: json.result.madeIn.title,
         code: json.result.madeIn.code,
-        id: json.result._id,
+        _id: json.result._id,
       }
     })
   }
