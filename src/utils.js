@@ -60,3 +60,7 @@ const dictionary = {
 export const translate = (name, lang) => {
   return dictionary[name][lang]
 }
+
+export const getPageNumberFromURL = () => {
+  return Number(window.location.pathname.substring(14))
+}

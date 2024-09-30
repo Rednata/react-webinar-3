@@ -1,4 +1,4 @@
-import { addLinkToItem, codeGenerator } from '../../utils';
+import { addLinkToItem, codeGenerator, getPageNumberFromURL } from '../../utils';
 import StoreModule from '../module';
 
 class Catalog extends StoreModule {
@@ -12,6 +12,7 @@ class Catalog extends StoreModule {
       list: [],
       pages: {
         current: 1,
+        current: getPageNumberFromURL() || 1,
         limit: 10,
         last:1,
       },

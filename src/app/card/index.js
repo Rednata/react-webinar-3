@@ -53,8 +53,8 @@ function Card() {
             onAdd={callbacks.onAdd}
             openModalBasket={callbacks.openModalBasket}
             textContentGoto={translate('btnGoto', select.lang)}
+            textContentLinkMain={translate('linkMain', select.lang)}
             textContentAdd={translate('btnAdd', select.lang)}
-            textContentLink={translate('linkMain', select.lang)}
             />
       }
      { select.activeModal === "basket" && <Basket /> }

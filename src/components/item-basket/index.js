@@ -7,7 +7,6 @@ import './style.css';
 import { Link } from 'react-router-dom';
 
 function ItemBasket(props) {
-  console.log('props: ', props);
   const cn = bem('ItemBasket');
 
   const callbacks = {

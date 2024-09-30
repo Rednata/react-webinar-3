@@ -11,8 +11,8 @@ function CardLayout({
   card={}, price = 0, sum=0, amount=0,
   onAdd=()=>{}, openModalBasket=()=>{},
   textContentGoto = 'Перейти',
+  textContentLinkMain = 'Перейти',
   textContentAdd = 'Добавить',
-  textContentLink = 'Главная',
   }) {
 
   const {
@@ -34,6 +34,7 @@ function CardLayout({
           sum={sum}
           amount={amount}
           textContentGoto={textContentGoto}
+          textContentLinkMain={textContentLinkMain}
         />
       <div className={cn('content')}>
         <p className={cn('description')}>{description}</p>

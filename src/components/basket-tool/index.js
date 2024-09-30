@@ -5,12 +5,24 @@ import { numberFormat, plural } from '../../utils';
 import './style.css';
 import { Link } from 'react-router-dom';
 
-function BasketTool({ sum = 0, amount = 0, onOpen =() => {}, textContentGoto = 'Перейти' }) {
+
+function BasketTool({
+  sum = 0, amount = 0,
+  onOpen =() => {},
+  onClickLink = () => {},
+  textContentGoto = 'Перейти',
+  textContentLinkMain = 'Главная',
+}) {
+
   const cn = bem('BasketTool');
+
+  const callbacks = {
+    onClickLink: () => {onClickLink(1)}
+  }
   return (
     <div className={cn()}>
       <div className={cn('link')}>
-        <Link to='/'>Главная</Link>
+        <Link to='/catalog/page' onClick={callbacks.onClickLink}>{textContentLinkMain}</Link>
       </div>
       <span className={cn('label')}>В корзине:</span>
       <span className={cn('total')}>
@@ -31,6 +43,7 @@ BasketTool.propTypes = {
   onOpen: PropTypes.func.isRequired,
   sum: PropTypes.number,
   amount: PropTypes.number,
+  onClickLink: PropTypes.func,
 };
 
 export default memo(BasketTool);

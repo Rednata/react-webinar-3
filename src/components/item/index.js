@@ -14,7 +14,6 @@ function Item(props) {
 
   return (
     <div className={cn()}>
-      {/*<div className={cn('code')}>{props.item._id}</div>*/}
       <div className={cn('title')}>
       <Link className={cn('link')} to={props.item.link}>
           {props.item.title}
@@ -25,7 +24,6 @@ function Item(props) {
         <div className={cn('cell')}>
           <button onClick={callbacks.onAdd}>{props.textContent}</button>
         </div>
-        {/* <button onClick={callbacks.onAdd}>Добавить</button> */}
       </div>
     </div>
   );

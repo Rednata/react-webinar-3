@@ -8,18 +8,11 @@ import useStore from '../../store/use-store';
 import useSelector from '../../store/use-selector';
 import PaginationLayout from '../../components/pagination-layout';
 import PaginationBtn from '../../components/pagination-btn';
-// import Pagination from '../pagination';
 import ControlLang from '../../components/control-lang';
 import {translate} from '../../utils';
 
-
-
 function Main() {
   const store = useStore();
-
-  useEffect(() => {
-    store.actions.catalog.load();
-  }, []);
 
   const select = useSelector(state => ({
     list: state.catalog.list,
@@ -32,6 +25,7 @@ function Main() {
 
   useEffect(() => {
     store.actions.catalog.load(select.currentPage)
+    window.history.pushState(select.currentPage, '', `/catalog/page=${select.currentPage}`)
   }, [select.currentPage])
 
   const callbacks = {
@@ -40,7 +34,7 @@ function Main() {
     // Открытие модалки корзины
     openModalBasket: useCallback(() => store.actions.modals.open('basket'), [store]),
     // Изменение номера активной страницы
-    changeActiveNum: useCallback((num) => store.actions.catalog.changeActiveNumPage(num), [store])
+    changeActiveNum: useCallback(num => store.actions.catalog.changeActiveNumPage(num), [store])
   };
 
   const renders = {
@@ -79,10 +73,11 @@ function Main() {
     <PageLayout>
       <ControlLang />
       <Head title={translate('titleShop', select.lang)} />
-      {/* <Head title="Магазин" /> */}
       <BasketTool onOpen={callbacks.openModalBasket}
         amount={select.amount}
         sum={select.sum}
+        onClickLink={callbacks.changeActiveNum}
+        textContentLinkMain={translate('linkMain', select.lang)}
         textContentGoto={translate('btnGoto', select.lang)} />
       <List list={select.list} renderItem={renders.item} />
       <PaginationLayout>

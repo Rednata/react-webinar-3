@@ -5,6 +5,7 @@ import Card from "./app/card";
 
 const router = createBrowserRouter([
   { path: "/", element: <App /> },
+  { path: "/catalog/:page", element: <App /> },
   { path: "/item/:id", element: <Card />}
 ]);
 
