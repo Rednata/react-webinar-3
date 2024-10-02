@@ -37,19 +37,19 @@ function CatalogFilter() {
       ],
       [],
     ),
-    filter: useMemo(
+    category: useMemo(
       () => [
-        { value: 'all', title: 'Все' },
-        { value: 'electronics', title: 'Электроника', id: '66fab39363bfe248a856308c' },
-        { value: 'phones', title: '- Телефоны', id: '66fab39363bfe248a856308d' },
-        { value: 'smart', title: '- - Смартфоны', id: '66fab39363bfe248a8563094' },
-        { value: 'accessories', title: '- - Аксессуары', id: '66fab39363bfe248a8563095' },
-        { value: 'notebooks', title: '- Ноутбуки', id: '66fab39363bfe248a856308e' },
-        { value: 'tv', title: '- Телевизоры', id: '66fab39363bfe248a856308f' },
-        { value: 'teach', title: 'Книги', id: '66fab39363bfe248a8563090' },
-        { value: 'books', title: '- Учебники', id: '66fab39363bfe248a8563091' },
-        { value: 'art', title: '- Художественная', id: '66fab39363bfe248a8563092' },
-        { value: 'comics', title: '- Комиксы', id: '66fab39363bfe248a8563093' },
+        { name: 'all', title: 'Все', value: '0' },
+        { name: 'electronics', title: 'Электроника', value: '66fab39363bfe248a856308c' },
+        { name: 'phones', title: '- Телефоны', value: '66fab39363bfe248a856308d' },
+        { name: 'smart', title: '- - Смартфоны', value: '66fab39363bfe248a8563094' },
+        { name: 'accessories', title: '- - Аксессуары', value: '66fab39363bfe248a8563095' },
+        { name: 'notebooks', title: '- Ноутбуки', value: '66fab39363bfe248a856308e' },
+        { name: 'tv', title: '- Телевизоры', value: '66fab39363bfe248a856308f' },
+        { name: 'teach', title: 'Книги', value: '66fab39363bfe248a8563090' },
+        { name: 'books', title: '- Учебники', value: '66fab39363bfe248a8563091' },
+        { name: 'art', title: '- Художественная', value: '66fab39363bfe248a8563092' },
+        { name: 'comics', title: '- Комиксы', value: '66fab39363bfe248a8563093' },
       ],
       [],
     ),
@@ -59,7 +59,7 @@ function CatalogFilter() {
 
   return (
     <SideLayout padding="medium">
-      <Select options={options.filter} value={select.category} onChange={callbacks.onFilter} />
+      {/* <Select options={options.category} value={select.category} onChange={callbacks.onFilter} /> */}
       <Select options={options.sort} value={select.sort} onChange={callbacks.onSort} />
       <Input
         value={select.query}

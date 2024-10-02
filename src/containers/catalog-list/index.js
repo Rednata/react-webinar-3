@@ -62,6 +62,7 @@ function CatalogList() {
     <Spinner active={select.waiting}>
       <List list={select.list} renderItem={renders.item} />
       <Pagination
+        indent={1}
         count={select.count}
         page={select.page}
         limit={select.limit}
