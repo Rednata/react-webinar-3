@@ -1,6 +1,6 @@
 import StoreModule from '../module';
 
-class Modals extends StoreModule {
+class ModalsState extends StoreModule {
   initState() {
     return {
       name: null,
@@ -16,4 +16,4 @@ class Modals extends StoreModule {
   }
 }
 
-export default Modals;
+export default ModalsState;

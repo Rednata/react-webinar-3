@@ -19,7 +19,9 @@ function ModalLayout(props) {
     });
     // Следим за изменениями размеров layout
     resizeObserver.observe(layout.current);
+    document.body.style.overflow = 'hidden';
     return () => {
+      document.body.style.overflow = 'auto';
       resizeObserver.disconnect();
     };
   }, []);
@@ -30,7 +32,7 @@ function ModalLayout(props) {
         <div className={cn('head')}>
           <h1 className={cn('title')}>{props.title}</h1>
           <button className={cn('close')} onClick={props.onClose}>
-            Закрыть
+            {props.labelClose}
           </button>
         </div>
         <div className={cn('content')}>{props.children}</div>
@@ -43,11 +45,13 @@ ModalLayout.propTypes = {
   title: PropTypes.string,
   onClose: PropTypes.func,
   children: PropTypes.node,
+  labelClose: PropTypes.string,
 };
 
-ModalLayout.defaultProps = {
-  title: 'Модалка',
-  onClose: () => {},
-};
+// ModalLayout.defaultProps = {
+//   title: 'Модалка',
+//   labelClose: 'Закрыть',
+//   onClose: () => {},
+// };
 
 export default memo(ModalLayout);
