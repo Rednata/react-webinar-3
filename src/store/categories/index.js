@@ -13,7 +13,7 @@ class CategoriesState extends StoreModule {
       const json = await res.json()
       
       this.setState({
-        list: json.result
+        list: json.result.items
       })
     } catch (error) {
       console.log('error: ', error);

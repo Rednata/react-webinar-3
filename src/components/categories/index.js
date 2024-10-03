@@ -2,8 +2,10 @@ import { memo } from 'react';
 import PropTypes from 'prop-types';
 // import './style.css';
 
-function Categories(props) {
-  console.log('props: ', props);
+function Categories({list}) {
+
+
+
 
   return (
     <div className="Categories">
