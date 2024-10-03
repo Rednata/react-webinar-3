@@ -1,11 +1,12 @@
 import { memo, useCallback } from 'react';
-import Controls from '../../components/controls';
 import { Link, useNavigate } from 'react-router-dom';
 import useSelector from '../../hooks/use-selector';
 import SideLayout from '../../components/side-layout';
+import useStore from '../../hooks/use-store';
 
 function AuthControl() {
 
+  const store = useStore();
   const navigate = useNavigate();
 
   const select = useSelector(state => ({
@@ -14,19 +15,23 @@ function AuthControl() {
   }));
 
   const callbacks = {
-    onLoginPageNavigate: useCallback(() => navigate('/login')),
-    logout: useCallback(() => console.log())
+    onLoginPageNavigate: useCallback(() => navigate('/login'), [store]),
+    logout: useCallback(() => store.actions.auth.deleteAuthUser(), [store])
   }
 
   return (
         select.token
       ? (
-        <SideLayout side='end' padding='small'>
+        <SideLayout side='end' padding='medium'>
           <Link to='/profile'>{select.userName.profile.name}</Link>
-          <Controls title='Выход' onHandleClick={callbacks.logout}/>
+          <button onClick={callbacks.logout}>Выход</button>
         </SideLayout>
         )
-      : <Controls title='Вход' onHandleClick={callbacks.onLoginPageNavigate}/>
+      : (
+        <SideLayout side='end' padding='medium'>
+          <button onClick={callbacks.onLoginPageNavigate}>Вход</button>
+        </SideLayout>
+      )
   );
 }
 

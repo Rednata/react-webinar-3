@@ -9,7 +9,34 @@ class AuthState extends StoreModule {
     };
   }
 
-  async getToken(data) {
+  async initToken() {
+    const getCookie = (name) => {
+      let cookie = document.cookie.split('; ').find(row => row.startsWith(name + '='));
+      return cookie ? cookie.split('=')[1] : null;
+    }
+
+    const token = getCookie('token')
+    if (token) {
+      const res = await fetch(`/api/v1/users/self?fields=*`, {
+        headers: {
+          'X-Token': token,
+          'Content-Type': 'application/json'
+        }
+      })
+      const json = await res.json()
+      if (res.ok) {
+        this.setState({
+          user: json.result, token, error: ''
+        }, 'Получение данных юзера при имеющемся токене')
+      } else {
+        this.setState({
+          error: json.error.message
+        }, 'Получение данных юзера при имеющемся токене')
+      }
+    }
+  }
+
+  async authUser(data) {
     const authData = {...data, remember: true}
     try {
       const res = await fetch(`/api/v1/users/sign`, {
@@ -21,20 +48,20 @@ class AuthState extends StoreModule {
       if (res.ok) {
         this.setState({
           user: json.result.user, token: json.result.token, error: ''
-        })
+        }, 'Получение данных юзера с нуля')
       } else {
         this.setState({
           error: json.error.message
-        })
+        }, 'Получение данных юзера с нуля')
       }
     } catch (error) {
       this.setState({
         ...this.getState(), error: 'Ошибка работы сервера'
-      })
+      }, 'Получение данных юзера с нуля')
     }
   }
 
-  async deleteAuthUser(data) {
+  async deleteAuthUser() {
     try {
       const res = await fetch(`/api/v1/users/sign`, {
         method: 'DELETE',

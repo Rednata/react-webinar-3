@@ -9,6 +9,7 @@ import ProfileCard from "../../components/profile-card";
 import useStore from "../../hooks/use-store";
 import useSelector from "../../hooks/use-selector";
 import { useNavigate } from "react-router-dom";
+import AuthControl from "../../containers/auth-control";
 
 function Profile() {
   const { t } = useTranslate();
@@ -26,16 +27,14 @@ function Profile() {
 
   useEffect(() => {
     if (!select.token) {
-      console.warn('select: ', select);
-      
       navigate('/login')
     }
   }, [select.token])
 
-  console.log('select: ', select);
   return (
     <PageLayout >
-      <Controls title='Выход' onHandleClick={callbacks.logout}/>
+      <AuthControl />
+      {/* <Controls title='Выход' onHandleClick={callbacks.logout}/> */}
       <Head title={t('Магазин')}>
         <LocaleSelect />
       </Head>

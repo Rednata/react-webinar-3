@@ -1,4 +1,4 @@
-import { memo, useCallback } from 'react';
+import { memo, useCallback, useEffect } from 'react';
 import PageLayout from "../../components/page-layout";
 import Head from '../../components/head';
 import LocaleSelect from '../../containers/locale-select';
@@ -7,17 +7,26 @@ import Form from '../../components/form';
 import useStore from '../../hooks/use-store';
 import AuthControl from '../../containers/auth-control';
 import useSelector from '../../hooks/use-selector';
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
 
   const store = useStore();
-
+  const navigate = useNavigate();
   const select = useSelector(state => ({
+    token: state.auth.token,
     error: state.auth.error
   }))
 
+  useEffect(() => {
+    store.actions.auth.initToken();
+    if (select.token) {
+      navigate('/profile')
+    }
+  }, [select.token])
+
   const callbacks = {
-    getToken: useCallback((data) => store.actions.auth.getToken(data), [store]),
+    authUser: useCallback((data) => store.actions.auth.authUser(data), [store]),
   }
 
   const options = {
@@ -40,7 +49,7 @@ function Login() {
       <Form
         inputData={options.inputData}
         formData={options.formData}
-        onHandleSubmit={callbacks.getToken}
+        onHandleSubmit={callbacks.authUser}
         error={select.error}
       >
       </Form>
