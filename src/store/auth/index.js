@@ -20,7 +20,7 @@ class AuthState extends StoreModule {
       const json = await res.json();
       if (res.ok) {
         this.setState({
-          ...this.getState(), user: json.result.user, token: json.result.token
+          user: json.result.user, token: json.result.token, error: ''
         })
       } else {
         this.setState({

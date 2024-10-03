@@ -1,6 +1,10 @@
 .Form {
-  
+
 }
+.Form_size_small {
+  max-width: 250px;
+}
+
 .Form-form {
   color: #000;
   padding: 20px;
@@ -22,13 +26,10 @@
   margin-bottom: 17px;
 }
 
-.Form-label, .Form-input {
-  display: block;
+.Form-btn_size_small {
+  width: max-content;
 }
 
-.Form-input {
-  border: 1px solid #767676;
-  border-radius: 1px;
-  min-width: 203px;
-  height: 26px;
+.Form-error {
+  color: red;
 }

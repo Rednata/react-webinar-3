@@ -5,18 +5,29 @@ import LocaleSelect from '../../containers/locale-select';
 import Navigation from '../../containers/navigation';
 import Form from '../../components/form';
 import useStore from '../../hooks/use-store';
-import useSelector from '../../hooks/use-selector';
-import SideLayout from '../../components/side-layout';
-import Controls from '../../components/controls';
-import { Link } from 'react-router-dom';
 import AuthControl from '../../containers/auth-control';
+import useSelector from '../../hooks/use-selector';
 
 function Login() {
 
   const store = useStore();
 
+  const select = useSelector(state => ({
+    error: state.auth.error
+  }))
+
   const callbacks = {
     getToken: useCallback((data) => store.actions.auth.getToken(data), [store]),
+  }
+
+  const options = {
+    inputData: [
+      {type: 'text', label: 'Логин', id: 'login', name: 'login'},
+      {type: 'password', label: 'Пароль', id: 'password', name: 'password'},
+    ],
+    formData: {
+      login: '', password: ''
+    }
   }
 
   return (
@@ -26,7 +37,12 @@ function Login() {
         <LocaleSelect />
       </Head>
       <Navigation />
-      <Form onHandleSubmit={callbacks.getToken}>
+      <Form
+        inputData={options.inputData}
+        formData={options.formData}
+        onHandleSubmit={callbacks.getToken}
+        error={select.error}
+      >
       </Form>
     </PageLayout>
   )
