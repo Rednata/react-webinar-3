@@ -8,15 +8,15 @@ import Head from '../../components/head';
 import CatalogFilter from '../../containers/catalog-filter';
 import CatalogList from '../../containers/catalog-list';
 import LocaleSelect from '../../containers/locale-select';
-import Controls from '../../components/controls';
 import { useNavigate } from 'react-router-dom';
+import AuthControl from '../../containers/auth-control';
 
 /**
  * Главная страница - первичная загрузка каталога
  */
 function Main() {
   const store = useStore();
-  const navigate = useNavigate();
+
   useInit(
     () => {
       store.actions.catalog.initParams();
@@ -27,13 +27,9 @@ function Main() {
 
   const { t } = useTranslate();
 
-  const callbacks = {
-    onLoginPageNavigate: useCallback(() => navigate('/login'))
-  }
-
   return (
     <PageLayout>
-      <Controls title='Вход' onHandleClick={callbacks.onLoginPageNavigate}/>
+      <AuthControl />
       <Head title={t('title')}>
         <LocaleSelect />
       </Head>

@@ -44,6 +44,7 @@ class AuthState extends StoreModule {
         },
       })
       const json = await res.json();
+      document.cookie = 'token=; max-age=-1';
       if (res.ok) {
         this.setState({
           ...this.getState(), user: {}, token: '', error: ''

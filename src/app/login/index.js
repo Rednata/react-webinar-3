@@ -9,34 +9,19 @@ import useSelector from '../../hooks/use-selector';
 import SideLayout from '../../components/side-layout';
 import Controls from '../../components/controls';
 import { Link } from 'react-router-dom';
+import AuthControl from '../../containers/auth-control';
 
 function Login() {
 
   const store = useStore();
-  const select = useSelector(state => ({
-    token: state.auth.token,
-    userName: state.auth.user,
-  }));
 
   const callbacks = {
     getToken: useCallback((data) => store.actions.auth.getToken(data), [store]),
-    logout: useCallback(() => console.log()
-    ),
   }
-
 
   return (
     <PageLayout>
-      {
-        select.token
-        ? (
-          <SideLayout side='end' padding='small'>
-            <Link to='/profile'>{select.userName.profile.name}</Link>
-            <Controls title='Выход' onHandleClick={callbacks.logout}/>
-          </SideLayout>
-          )
-        : <Controls title='Вход'/>
-      }
+      <AuthControl />
       <Head title='Магазин'>
         <LocaleSelect />
       </Head>
