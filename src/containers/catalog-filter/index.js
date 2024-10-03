@@ -1,21 +1,30 @@
-import { memo, useCallback, useMemo } from 'react';
+import { memo, useCallback, useEffect, useMemo, useState } from 'react';
 import useTranslate from '../../hooks/use-translate';
 import useStore from '../../hooks/use-store';
 import useSelector from '../../hooks/use-selector';
 import Select from '../../components/select';
 import Input from '../../components/input';
 import SideLayout from '../../components/side-layout';
+import Categories from '../../components/categories';
 
 /**
  * Контейнер со всеми фильтрами каталога
  */
 function CatalogFilter() {
+
+  useEffect(() => {
+    store.actions.categories.getCategories()
+  }, [])
+
   const store = useStore();
 
   const select = useSelector(state => ({
     sort: state.catalog.params.sort,
     query: state.catalog.params.query,
+    categories: state.categories.list,
   }));
+
+  console.log('select: ', select);
 
   const callbacks = {
     // Сортировка
@@ -59,6 +68,7 @@ function CatalogFilter() {
 
   return (
     <SideLayout padding="medium">
+      <Categories list={select.categories}/>
       {/* <Select options={options.category} value={select.category} onChange={callbacks.onFilter} /> */}
       <Select options={options.sort} value={select.sort} onChange={callbacks.onSort} />
       <Input
