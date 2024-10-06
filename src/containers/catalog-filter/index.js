@@ -78,7 +78,7 @@ function CatalogFilter() {
         onChange={callbacks.onSearch}
         placeholder={'Поиск'}
         delay={1000}
-        indent={1}
+         theme='big'
       />
       <button onClick={callbacks.onReset}>{t('filter.reset')}</button>
     </SideLayout>

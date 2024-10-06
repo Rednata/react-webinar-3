@@ -18,12 +18,12 @@ function Login() {
     error: state.auth.error
   }))
 
-  useEffect(() => {
-    store.actions.auth.initToken();
-    if (select.token) {
-      navigate('/profile')
-    }
-  }, [select.token])
+  // useEffect(() => {
+  //   store.actions.auth.initToken();
+  //   if (select.token) {
+  //     navigate('/profile')
+  //   }
+  // }, [select.token])
 
   const callbacks = {
     authUser: useCallback((data) => store.actions.auth.authUser(data), [store]),

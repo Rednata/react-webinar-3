@@ -30,7 +30,7 @@ class AuthState extends StoreModule {
         }, 'Получение данных юзера при имеющемся токене')
       } else {
         this.setState({
-          error: json.error.message
+          error: json.error.data.issues[0].message
         }, 'Получение данных юзера при имеющемся токене')
       }
     }
@@ -51,7 +51,7 @@ class AuthState extends StoreModule {
         }, 'Получение данных юзера с нуля')
       } else {
         this.setState({
-          error: json.error.message
+          error: json.error.data.issues[0].message
         }, 'Получение данных юзера с нуля')
       }
     } catch (error) {

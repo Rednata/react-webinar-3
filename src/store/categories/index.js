@@ -14,7 +14,7 @@ class CategoriesState extends StoreModule {
       
       this.setState({
         list: json.result.items
-      })
+      }, 'Получение списка категорий')
     } catch (error) {
       console.log('error: ', error);
     }
