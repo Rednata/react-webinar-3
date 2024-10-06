@@ -17,7 +17,6 @@ function App() {
 
   const store = useStore();
   const token = useSelector(state => state.auth.token)
-  console.log('token: ', token);
 
   useEffect(() => {
     store.actions.auth.initToken();

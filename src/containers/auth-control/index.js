@@ -11,7 +11,7 @@ function AuthControl() {
 
   const select = useSelector(state => ({
     token: state.auth.token,
-    userName: state.auth.user,
+    user: state.auth.user,
   }));
 
   const callbacks = {
@@ -23,7 +23,8 @@ function AuthControl() {
         select.token
       ? (
         <SideLayout side='end' padding='medium'>
-          <Link to='/profile'>{select.userName.profile.name}</Link>
+          {/* <Link to='/profile'>ssss</Link> */}
+          <Link to='/profile'>{select.user.profile.name}</Link>
           <button onClick={callbacks.logout}>Выход</button>
         </SideLayout>
         )

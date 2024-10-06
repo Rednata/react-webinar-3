@@ -17,18 +17,16 @@ function Profile() {
   const store = useStore();
 
   const select = useSelector(state => ({
-    user: state.auth.user,
+    user: state.user.user,
     token: state.auth.token
   }))
-
+  console.log(' select: ',  select);
   const callbacks = {
     logout: useCallback(() => store.actions.auth.deleteAuthUser(), [store])
   }
 
   useEffect(() => {
-    if (!select.token) {
-      navigate('/login')
-    }
+    store.actions.user.getUserData(select.token);
   }, [select.token])
 
   return (
@@ -39,11 +37,12 @@ function Profile() {
         <LocaleSelect />
       </Head>
       <Navigation />
-      {select.token &&
+      {select.user &&
       <ProfileCard
-        name={select.user.profile.name}
-        phone={select.user.profile.phone}
-        email={select.user.email}/>}
+        name={select.user.profile?.name}
+        phone={select.user.profile?.phone}
+        email={select.user.email}
+        />}
     </PageLayout>
   )
 }

@@ -4,7 +4,7 @@ class AuthState extends StoreModule {
   initState() {
     return {
       token: '',
-      user: {},
+      user: '',
       error: '',
     };
   }
@@ -12,10 +12,11 @@ class AuthState extends StoreModule {
   async initToken() {
     const getCookie = (name) => {
       let cookie = document.cookie.split('; ').find(row => row.startsWith(name + '='));
-      return cookie ? cookie.split('=')[1] : null;
+      return cookie ? cookie.split('=')[1] : '';
     }
 
     const token = getCookie('token')
+
     if (token) {
       const res = await fetch(`/api/v1/users/self?fields=*`, {
         headers: {
