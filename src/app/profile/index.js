@@ -20,10 +20,6 @@ function Profile() {
     user: state.user.user,
     token: state.auth.token
   }))
-  console.log(' select: ',  select);
-  const callbacks = {
-    logout: useCallback(() => store.actions.auth.deleteAuthUser(), [store])
-  }
 
   useEffect(() => {
     store.actions.user.getUserData(select.token);
@@ -32,17 +28,16 @@ function Profile() {
   return (
     <PageLayout >
       <AuthControl />
-      {/* <Controls title='Выход' onHandleClick={callbacks.logout}/> */}
       <Head title={t('Магазин')}>
         <LocaleSelect />
       </Head>
       <Navigation />
-      {select.user &&
-      <ProfileCard
-        name={select.user.profile?.name}
-        phone={select.user.profile?.phone}
-        email={select.user.email}
-        />}
+        {select.user &&
+        <ProfileCard
+          name={select.user.profile?.name}
+          phone={select.user.profile?.phone}
+          email={select.user.email}
+          />}
     </PageLayout>
   )
 }
