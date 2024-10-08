@@ -28,7 +28,7 @@ function CatalogList() {
     addToBasket: useCallback(_id => store.actions.basket.addToBasket(_id), [store]),
     // Пагинация
     onPaginate: useCallback(page => store.actions.catalog.setParams({ page }), [store]),
-    // Генератор ссылки для пагинатора
+    // генератор ссылки для пагинатора
     makePaginatorLink: useCallback(
       page => {
         return `?${new URLSearchParams({

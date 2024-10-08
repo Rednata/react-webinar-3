@@ -1,10 +1,11 @@
 import { memo } from 'react';
 import PropTypes from 'prop-types';
 import { cn as bem } from '@bem-react/classname';
-import { numberFormat } from '../../utils';
+import numberFormat from '../../utils/number-format';
 import './style.css';
 
-function ArticleCard({ article, onAdd, t }) {
+function ArticleCard(props) {
+  const { article, onAdd = () => {}, t = text => text } = props;
   const cn = bem('ArticleCard');
   return (
     <div className={cn()}>
@@ -44,10 +45,5 @@ ArticleCard.propTypes = {
   onAdd: PropTypes.func,
   t: PropTypes.func,
 };
-
-// ArticleCard.defaultProps = {
-//   onAdd: () => {},
-//   t: text => text,
-// };
 
 export default memo(ArticleCard);

@@ -8,16 +8,14 @@ import Head from '../../components/head';
 import CatalogFilter from '../../containers/catalog-filter';
 import CatalogList from '../../containers/catalog-list';
 import LocaleSelect from '../../containers/locale-select';
+import TopHead from '../../containers/top-head';
 
-/**
- * Главная страница - первичная загрузка каталога
- */
 function Main() {
   const store = useStore();
 
   useInit(
-    () => {
-      store.actions.catalog.initParams();
+    async () => {
+      await Promise.all([store.actions.catalog.initParams(), store.actions.categories.load()]);
     },
     [],
     true,
@@ -27,6 +25,7 @@ function Main() {
 
   return (
     <PageLayout>
+      <TopHead />
       <Head title={t('title')}>
         <LocaleSelect />
       </Head>
