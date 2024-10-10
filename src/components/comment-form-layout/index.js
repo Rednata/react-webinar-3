@@ -3,12 +3,14 @@ import PropTypes from 'prop-types';
 import { cn as bem } from '@bem-react/classname';
 import './style.css';
 
-function CommentFormLayout({title, padding, value, onSubmit, onChange, children }) {
+function CommentFormLayout({title, padding, value, placeholder='Текст', onSubmit, onChange, children }) {
+
   const cn = bem('CommentFormLayout');
 
   const callbacks = {
     onChange: (e) => onChange(e.target.value),
   }
+
   return (
     <div className={cn({padding})}>
       <p className={cn('title')}>{title}</p>
@@ -16,7 +18,7 @@ function CommentFormLayout({title, padding, value, onSubmit, onChange, children 
         <textarea
           className={cn('textarea')}
           name="text"
-          placeholder='Текст'
+          placeholder={placeholder}
           value={value}
           onChange={callbacks.onChange} />
       </form>

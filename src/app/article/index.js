@@ -1,4 +1,4 @@
-import { memo, useCallback, useMemo, useState } from 'react';
+import { memo, useCallback, useEffect, useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import useStore from '../../hooks/use-store';
 import useTranslate from '../../hooks/use-translate';
@@ -17,7 +17,6 @@ import commentsActions from '../../store-redux/comments/actions';
 import userCommentActions from '../../store-redux/user-comment/actions';
 import CommentsList from '../../containers/comments-list';
 import useSelectorCustom  from '../../hooks/use-selector';
-import CommentForm from '../../components/comment-form';
 import NonAuth from '../../components/non-auth';
 import CommentFormLayout from '../../components/comment-form-layout';
 
@@ -30,7 +29,6 @@ function Article() {
   const params = useParams();
 
   useInit(() => {
-    //store.actions.article.load(params.id);
     dispatch(articleActions.load(params.id));
     dispatch(commentsActions.load(params.id));
   }, [params.id]);
@@ -40,7 +38,6 @@ function Article() {
       article: state.article.data,
       waiting: state.article.waiting,
       comments: state.comments.data,
-      // exists: state.session.exists,
     }),
     shallowequal,
   ); // Нужно указать функцию для сравнения свойства объекта, так как хуком вернули объект
@@ -49,22 +46,51 @@ function Article() {
     exists: state.session.exists,
   }));
 
-  const [text, setText] = useState('');
+  const [answer, setAnswer] = useState('')
+  const [newComment, setNewComment] = useState('')
+  const [commentId, setCommentId] = useState('');
+  const [placeholder, setPlaceholder] = useState('');
 
   const { t } = useTranslate();
 
   const callbacks = {
     // Добавление в корзину
     addToBasket: useCallback(_id => store.actions.basket.addToBasket(_id), [store]),
-    onChange: useCallback(value => setText(value), []),
+
+    // Колбэк на ввод в форме отправки нового комментария
+    onChangeNewComment:  (value) => {
+      setNewComment(value)
+    },
+
+    // Колбэк на ввод в форме отправки ответа на комментарий
+    onChangeAnswer: useCallback(value => setAnswer(value), []),
+
     // Отправка нового комментария
-    onSubmit: useCallback(e => {
+    onSubmitNewComment: useCallback(e => {
       e.preventDefault();
-      const data = {text, parent: {'_id': params.id, '_type': 'article'}}
-      dispatch(userCommentActions.post(data))
-    }, [text]),
+      const data = {text: newComment, parent: {'_id': params.id, '_type': 'article'}};
+      dispatch(userCommentActions.post(data, () => dispatch(commentsActions.load(params.id))));
+      setNewComment('');
+    }, [newComment]),
+
+    // Отправка ответа на комментарий
+    onSubmitAnswer: useCallback(e => {
+      e.preventDefault();
+      const data = {text: answer, parent: {'_id': commentId, '_type': 'comment'}};
+      dispatch(userCommentActions.post(data, () => dispatch(commentsActions.load(params.id))));
+      setAnswer('');
+    }, [answer]),
+
+    // Закрытие формы отправки ответа на комментарий
+    onCloseForm: useCallback(e => {
+      dispatch(commentsActions.update(commentId))
+    }, [store]),
+
+    // Показать / скрыть форму для выбранного комментария
     showAnsqwerForm: useCallback(item => {
       dispatch(commentsActions.update(item.value))
+      setCommentId(item.value);
+      setPlaceholder(`Мой ответ для ${item.author.profile.name}`);
     }, [store])
   };
 
@@ -83,9 +109,17 @@ function Article() {
               <CommentsList items={select.comments} onClick={callbacks.showAnsqwerForm}>
                 {
                   selectCustom.exists
-                    ? <CommentFormLayout padding='small' value={text} title='Новый ответ' onChange={callbacks.onChange} onSubmit={callbacks.onSubmit}>
+                    ? <CommentFormLayout
+                        padding='small'
+                        name='answer'
+                        value={answer}
+                        title='Новый ответ'
+                        placeholder={placeholder}
+                        onChange={callbacks.onChangeAnswer}
+                        onSubmit={callbacks.onSubmitAnswer}
+                      >
                         <button type='submit' form='form-comment'>Отправить</button>
-                        <button type='button' >Отменить</button>
+                        <button type='button' onClick={callbacks.onCloseForm} >Отменить</button>
                       </CommentFormLayout>
                     : <NonAuth />
                 }
@@ -95,7 +129,14 @@ function Article() {
         }
         {
           selectCustom.exists
-          ? <CommentFormLayout value={text} title='Новый комментарий' onChange={callbacks.onChange} onSubmit={callbacks.onSubmit}>
+          ? <CommentFormLayout
+              value={newComment}
+              name='newComment'
+              title='Новый комментарий'
+              placeholder='Текст'
+              onChange={callbacks.onChangeNewComment}
+              onSubmit={callbacks.onSubmitNewComment}
+            >
              <button type='submit' form='form-comment' >Отправить</button>
           </CommentFormLayout>
           : <NonAuth />

@@ -49,7 +49,7 @@ export default {
         return item
       })
 
-      dispatch({ type: 'comments/update-showAnsqwer', payload: { data: newComments} });
+      dispatch({ type: 'comments/update-showAnswer', payload: { data: newComments} });
     }
 
   }
