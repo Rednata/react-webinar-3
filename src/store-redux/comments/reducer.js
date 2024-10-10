@@ -8,13 +8,13 @@ export const initialState = {
 function reducer(state = initialState, action) {
 
   switch (action.type) {
-    case 'article/load-start':
+    case 'comments/load-start':
       return { ...state, data: {}, waiting: true };
 
-    case 'article/load-success':
+    case 'comments/load-success':
       return { ...state, data: action.payload.data, waiting: false };
 
-    case 'article/load-error':
+    case 'comments/load-error':
       return { ...state, data: {}, waiting: false }; //@todo текст ошибки сохранять?
 
     default:
