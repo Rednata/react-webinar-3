@@ -1,0 +1,10 @@
+.NonAuth {
+  padding: 0 20px;
+}
+
+.NonAuth-link {
+  text-decoration: underline;
+  text-decoration-skip-ink: none;
+  color: #0087e9;
+  cursor: pointer;
+}

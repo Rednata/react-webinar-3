@@ -1,0 +1,41 @@
+.CommentItem-item {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.CommentItem-item:not(:last-child) {
+  margin-bottom: 30px;
+}
+
+.CommentItem-header {
+
+}
+
+.CommentItem-author {
+  font-weight: 700;
+  font-size: 12px;
+  color: #000;
+  margin-right: 9px;
+}
+
+.CommentItem-date {
+  font-size: 12px;
+  color: #666;
+}
+
+.CommentItem-body {
+  font-size: 14px;
+  color: #000;
+}
+
+.CommentItem-btn {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  color: #0087e9;
+  border: none;
+  background-color: transparent;
+  padding: 0;
+  cursor: pointer;
+}

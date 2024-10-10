@@ -24,7 +24,8 @@ export default {
           author: item?.author,
           value: item?._id,
           text: '  '.repeat(level) + item?.text,
-          level: level
+          level: level,
+          showAnsqwer: false,
         })}).filter(item => item.text !== 'undefined') ;
 
         dispatch({ type: 'comments/load-success', payload: { data: comments } });
@@ -34,4 +35,22 @@ export default {
       }
     };
   },
+
+  update: id => {
+    return (dispatch, getState) => {
+      const comments = getState().comments.data;
+      const newComments = comments.map(item => {
+        if (item.value === id) {
+          const isShowAnsqwer = item.showAnsqwer;
+          item.showAnsqwer = !isShowAnsqwer;
+        } else {
+          item.showAnsqwer = false;
+        }
+        return item
+      })
+
+      dispatch({ type: 'comments/update-showAnsqwer', payload: { data: newComments} });
+    }
+
+  }
 };
